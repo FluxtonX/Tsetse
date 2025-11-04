@@ -16,7 +16,7 @@ class AuthScreen extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColors.darkGreen, AppColors.lightGreen],
+            colors: [AppColors.lightskyblue, AppColors.skyblue],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -24,16 +24,6 @@ class AuthScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Align(
-              alignment: FractionalOffset(0.8, 0.1),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Transform.rotate(
-                  angle: 1,
-                  child: Image.asset('assets/icons/fly.png', height: 31),
-                ),
-              ),
-            ),
             Container(
               height: 140,
               width: 140,
@@ -44,22 +34,7 @@ class AuthScreen extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  ImageFiltered(
-                    imageFilter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        Colors.greenAccent.withOpacity(0.5), // glow color
-                        BlendMode.srcATop,
-                      ),
-                      child: Image.asset(
-                        'assets/icons/fly.png',
-                        width: 100,
-                        height: 100,
-                      ),
-                    ),
-                  ),
-
-                  Image.asset('assets/icons/fly.png', width: 100, height: 100),
+                  Image.asset('assets/icons/fly2.png', width: 100, height: 100),
                 ],
               ),
             ),
@@ -67,8 +42,17 @@ class AuthScreen extends StatelessWidget {
             const Text(
               "TSETSE",
               style: TextStyle(
-                color: Color(0xFF00FF66),
+                color: AppColors.Tsetsecolor,
                 fontSize: 45,
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            SizedBox(height: 30),
+            const Text(
+              "Welcome to TSETSE",
+              style: TextStyle(
+                color: AppColors.Tsetsecolor,
+                fontSize: 24,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -78,7 +62,7 @@ class AuthScreen extends StatelessWidget {
               child: Text(
                 "Our AI alarm that refuses to let you sleep your life away..",
                 style: TextStyle(
-                  color: Colors.white70,
+                  color: AppColors.subtittlecolor,
                   fontSize: 18,
                   height: 1.5,
                   fontWeight: FontWeight.w600,
@@ -97,75 +81,50 @@ class AuthScreen extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            SizedBox(height: 60),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(width: 20),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const RegistrationScreen(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    height: 46,
-                    width: 196,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(70),
-                      border: Border.all(color: AppColors.white, width: 0.8),
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Register',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: AppColors.white,
-                        ),
-                      ),
+            SizedBox(height: 80),
+
+            GestureDetector(
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const RegistrationScreen(),
+                  ),
+                );
+              },
+              child: Container(
+                height: 46,
+                width: 196,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(70),
+                  border: Border.all(color: AppColors.Tsetsecolor, width: 0.8),
+                ),
+                child: Center(
+                  child: Text(
+                    'Register',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.Tsetsecolor,
                     ),
                   ),
                 ),
-                Transform.rotate(
-                  angle: 0,
-                  child: Image.asset('assets/icons/fly.png', height: 31),
-                ),
-              ],
-            ),
-            SizedBox(height: 15),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                SizedBox(width: 15),
-
-                Reusablebutton(
-                  text: 'Login',
-                  backgroundColor: AppColors.textWhite,
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
-                      ),
-                    );
-                  },
-                ),
-                SizedBox(width: 31),
-              ],
-            ),
-
-            Align(
-              alignment: FractionalOffset(0.1, 0.10),
-              child: Transform.rotate(
-                angle: 1,
-                child: Image.asset('assets/icons/fly.png', height: 31),
               ),
             ),
+
+            SizedBox(height: 15),
+
+            Reusablebutton(
+              text: 'Login',
+              backgroundColor: AppColors.Tsetsecolor,
+              onTap: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                );
+              },
+            ),
+            SizedBox(width: 31),
           ],
         ),
       ),
@@ -201,7 +160,7 @@ class Reusablebutton extends StatelessWidget {
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.w600,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),

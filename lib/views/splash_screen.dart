@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
         height: double.infinity,
         decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [AppColors.darkGreen, AppColors.lightGreen],
+            colors: [AppColors.lightskyblue, AppColors.skyblue],
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),
@@ -23,16 +23,6 @@ class SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Align(
-              alignment: FractionalOffset(0.8, 0.1),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Transform.rotate(
-                  angle: 1,
-                  child: Image.asset('assets/icons/fly.png', height: 31),
-                ),
-              ),
-            ),
             Container(
               height: 140,
               width: 140,
@@ -43,22 +33,7 @@ class SplashScreen extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  ImageFiltered(
-                    imageFilter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
-                    child: ColorFiltered(
-                      colorFilter: ColorFilter.mode(
-                        Colors.greenAccent.withOpacity(0.5), // glow color
-                        BlendMode.srcATop,
-                      ),
-                      child: Image.asset(
-                        'assets/icons/fly.png',
-                        width: 100,
-                        height: 100,
-                      ),
-                    ),
-                  ),
-
-                  Image.asset('assets/icons/fly.png', width: 100, height: 100),
+                  Image.asset('assets/icons/fly2.png', width: 100, height: 100),
                 ],
               ),
             ),
@@ -66,7 +41,7 @@ class SplashScreen extends StatelessWidget {
             const Text(
               "TSETSE",
               style: TextStyle(
-                color: Color(0xFF00FF66),
+                color: AppColors.Tsetsecolor,
                 fontSize: 45,
                 fontWeight: FontWeight.w700,
               ),
@@ -77,33 +52,12 @@ class SplashScreen extends StatelessWidget {
               child: Text(
                 "Your AI alarm that learns your \n sleep habits and won’t take \nsnooze for an answer.",
                 style: TextStyle(
-                  color: Colors.white70,
+                  color: AppColors.subtittlecolor,
                   fontSize: 18,
                   height: 1.5,
                   fontWeight: FontWeight.w600,
                 ),
                 textAlign: TextAlign.center,
-              ),
-            ),
-            Align(
-              alignment: FractionalOffset(0.7, 0.1),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Transform.rotate(
-                  angle: 5.7,
-                  child: Image.asset('assets/icons/fly.png', height: 31),
-                ),
-              ),
-            ),
-            // 🔵 Positioned image AFTER the column = appears on top
-            Align(
-              alignment: FractionalOffset(0.1, 0.10),
-              child: Padding(
-                padding: const EdgeInsets.only(top: 80),
-                child: Transform.rotate(
-                  angle: 1,
-                  child: Image.asset('assets/icons/fly.png', height: 31),
-                ),
               ),
             ),
 

@@ -17,15 +17,23 @@ class ReuseablePasswordfield extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
+        margin: const EdgeInsets.symmetric(vertical: 3),
         decoration: BoxDecoration(
           color: AppColors.white,
-          borderRadius: BorderRadius.circular(50),
-          border: Border.all(color: AppColors.lightGreen, width: 1),
+          borderRadius: BorderRadius.only(
+            bottomRight: Radius.circular(20),
+            bottomLeft: Radius.circular(20),
+          ),
+
+          border: Border(
+            bottom: BorderSide(color: AppColors.Tsetsecolor, width: 1.5),
+          ),
         ),
         child: TextField(
           decoration: InputDecoration(
             hintText: hintText,
+            hintStyle: TextStyle(color: Color.fromRGBO(154, 154, 154, 1)),
+
             prefixIcon: Icon(prefixIcon, color: Colors.black),
             suffixIcon: Icon(suffixIcon, color: Colors.black),
             border: InputBorder.none,
@@ -35,8 +43,6 @@ class ReuseablePasswordfield extends StatelessWidget {
             ),
           ),
         ),
-
-      
       ),
     );
   }

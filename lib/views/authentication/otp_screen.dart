@@ -1,15 +1,12 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:tsetse/Widgets/reusbale_textfield.dart';
-import 'package:tsetse/Widgets/reuseable_passwordfield.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart';
+import 'package:tsetse/views/authentication/permission.dart';
 
-import 'package:tsetse/views/authentication/otp_screen.dart';
-
-class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({super.key});
+class OtpScreen extends StatelessWidget {
+  const OtpScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +30,7 @@ class RegistrationScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'Let’s Get You \nStarted',
+                  'Verification \nCode',
                   style: TextStyle(
                     fontSize: 34,
                     color: AppColors.Tsetsecolor,
@@ -42,7 +39,8 @@ class RegistrationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+
+            SizedBox(height: 65),
 
             Container(
               height: 74,
@@ -86,7 +84,7 @@ class RegistrationScreen extends StatelessWidget {
                     children: [
                       SizedBox(height: 20),
                       Text(
-                        'Register Account',
+                        'VERIFICATION',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -95,59 +93,60 @@ class RegistrationScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Create a new account to get started and enjoy \nTSETSE app access to our features',
+                        'Please enter code send to;',
                         style: TextStyle(color: AppColors.subtittlecolor),
                         textAlign: TextAlign.center,
                       ),
+                      Text(
+                        'Example@gmail.com',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
                       SizedBox(height: 10),
-                      ReusableTextField(hintText: 'Name', icon: Icons.person),
-                      ReusableTextField(
-                        hintText: 'Enter your Email',
-                        icon: Icons.email,
-                      ),
-                      ReuseablePasswordfield(
-                        hintText: 'Enter your password',
-                        prefixIcon: Icons.lock,
-                        suffixIcon: Icons.remove_red_eye,
-                      ),
-                      ReuseablePasswordfield(
-                        hintText: 'Confirm Password',
-                        prefixIcon: Icons.lock,
-                        suffixIcon: Icons.remove_red_eye,
+                      PinCodeTextField(
+                        appContext: context,
+                        length: 4,
+                        animationType: AnimationType.fade,
+                        pinTheme: PinTheme(
+                          shape: PinCodeFieldShape.underline,
+
+                          fieldHeight: 70, // 👈 make taller if you want
+                          fieldWidth: 40,
+                          activeColor:
+                              AppColors.Tsetsecolor, // active line color
+                          inactiveColor:
+                              AppColors.Tsetsecolor, // default line color
+                          selectedColor: AppColors.Tsetsecolor, // when focused
+                        ),
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        animationDuration: const Duration(milliseconds: 200),
+                        keyboardType: TextInputType.number,
+                        onChanged: (value) {},
                       ),
 
-                      const SizedBox(height: 40),
+                      Text(
+                        'Change Email Account',
+                        style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          fontSize: 14,
+                        ),
+                      ),
+
+                      const SizedBox(height: 120),
                       Reusablebutton(
-                        text: 'Signup',
+                        text: 'Continue',
                         backgroundColor: AppColors.Tsetsecolor,
                         onTap: () {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const OtpScreen(),
+                              builder: (context) => const Permission(),
                             ),
                           );
                         },
-                      ),
-                      const SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-
-                        children: [
-                          Text(
-                            'Already have account? ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(154, 154, 154, 1),
-                            ),
-                          ),
-                          Text(
-                            'Login',
-                            style: TextStyle(
-                              color: AppColors.Tsetsecolor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),

@@ -1,15 +1,13 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:tsetse/Widgets/reusbale_textfield.dart';
 import 'package:tsetse/Widgets/reuseable_passwordfield.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart';
-
 import 'package:tsetse/views/authentication/otp_screen.dart';
+import 'package:tsetse/views/authentication/permission.dart';
 
-class RegistrationScreen extends StatelessWidget {
-  const RegistrationScreen({super.key});
+class NameScreen extends StatelessWidget {
+  const NameScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +31,7 @@ class RegistrationScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  'Let’s Get You \nStarted',
+                  'Let’s Get Personal',
                   style: TextStyle(
                     fontSize: 34,
                     color: AppColors.Tsetsecolor,
@@ -42,7 +40,21 @@ class RegistrationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 25),
+
+            Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Text(
+                  'TSETSE needs your name — so it \nknows who to yell at in the morning.',
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: AppColors.subtittlecolor,
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(height: 65),
 
             Container(
               height: 74,
@@ -86,7 +98,7 @@ class RegistrationScreen extends StatelessWidget {
                     children: [
                       SizedBox(height: 20),
                       Text(
-                        'Register Account',
+                        'Name',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
@@ -95,59 +107,26 @@ class RegistrationScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
                       Text(
-                        'Create a new account to get started and enjoy \nTSETSE app access to our features',
+                        'What should TSETSE call you?',
                         style: TextStyle(color: AppColors.subtittlecolor),
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 10),
-                      ReusableTextField(hintText: 'Name', icon: Icons.person),
-                      ReusableTextField(
-                        hintText: 'Enter your Email',
-                        icon: Icons.email,
-                      ),
-                      ReuseablePasswordfield(
-                        hintText: 'Enter your password',
-                        prefixIcon: Icons.lock,
-                        suffixIcon: Icons.remove_red_eye,
-                      ),
-                      ReuseablePasswordfield(
-                        hintText: 'Confirm Password',
-                        prefixIcon: Icons.lock,
-                        suffixIcon: Icons.remove_red_eye,
-                      ),
 
-                      const SizedBox(height: 40),
+                      ReusableTextField(hintText: 'Name', icon: Icons.person),
+
+                      const SizedBox(height: 200),
                       Reusablebutton(
-                        text: 'Signup',
+                        text: 'Next',
                         backgroundColor: AppColors.Tsetsecolor,
                         onTap: () {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const OtpScreen(),
+                              builder: (context) => const Permission(),
                             ),
                           );
                         },
-                      ),
-                      const SizedBox(height: 15),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-
-                        children: [
-                          Text(
-                            'Already have account? ',
-                            style: TextStyle(
-                              color: Color.fromRGBO(154, 154, 154, 1),
-                            ),
-                          ),
-                          Text(
-                            'Login',
-                            style: TextStyle(
-                              color: AppColors.Tsetsecolor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
                       ),
                     ],
                   ),
