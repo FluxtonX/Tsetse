@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
+import 'package:tsetse/views/alerttime_screen.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart'
     show Reusablebutton;
-import 'package:tsetse/views/authentication/otp_screen.dart';
+
 
 class Permission extends StatelessWidget {
   const Permission({super.key});
@@ -39,20 +40,7 @@ class Permission extends StatelessWidget {
               ),
             ),
 
-            Align(
-              alignment: Alignment.bottomLeft,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'TSETSE needs your name — so it \nknows who to yell at in the morning.',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: AppColors.subtittlecolor,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 65),
+            SizedBox(height: 30),
 
             Container(
               height: 74,
@@ -110,8 +98,36 @@ class Permission extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 10),
+                      buildPermissionTile(
+                        icon: Icons.camera_alt,
+                        title: "Camera",
+                        subtitle: "To verify your wake up selfies",
+                        value: true,
+                        color: AppColors.Tsetsecolor,
+                      ),
+                      buildPermissionTile(
+                        icon: Icons.notifications_none,
+                        title: "Notification",
+                        subtitle: "For pre alarm reminders",
+                        value: false,
+                        color: AppColors.Tsetsecolor,
+                      ),
+                      buildPermissionTile(
+                        icon: Icons.location_on_outlined,
+                        title: "Location",
+                        subtitle: "To alert your Buzz buddy if you oversleep",
+                        value: false,
+                        color: AppColors.Tsetsecolor,
+                      ),
+                      buildPermissionTile(
+                        icon: Icons.phone,
+                        title: "Contacts",
+                        subtitle: "To connect your Buzz buddy",
+                        value: false,
+                        color: AppColors.Tsetsecolor,
+                      ),
+                      SizedBox(height: 60),
 
-                      const SizedBox(height: 200),
                       Reusablebutton(
                         text: 'Next',
                         backgroundColor: AppColors.Tsetsecolor,
@@ -119,7 +135,7 @@ class Permission extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const OtpScreen(),
+                              builder: (context) => const AlarmTimeScreen(),
                             ),
                           );
                         },
@@ -134,4 +150,51 @@ class Permission extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget buildPermissionTile({
+  required IconData icon,
+  required String title,
+  required String subtitle,
+  required bool value,
+  required Color color,
+}) {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 20),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+    decoration: BoxDecoration(
+      border: Border.all(color: color, width: 1.2),
+      borderRadius: BorderRadius.circular(15),
+    ),
+    child: Row(
+      children: [
+        CircleAvatar(
+          radius: 22,
+          backgroundColor: color.withOpacity(0.1),
+          child: Icon(icon, color: color),
+        ),
+        const SizedBox(width: 16),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 15,
+                ),
+              ),
+              const SizedBox(height: 2),
+              Text(
+                subtitle,
+                style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+              ),
+            ],
+          ),
+        ),
+        Switch(value: value, onChanged: (_) {}, activeColor: color),
+      ],
+    ),
+  );
 }
