@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:tsetse/Widgets/reusbale_textfield.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart';
 import 'package:tsetse/views/authentication/permission.dart';

@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tsetse/Widgets/reusbale_textfield.dart';
-import 'package:tsetse/Widgets/reuseable_passwordfield.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart';
-import 'package:tsetse/views/authentication/otp_screen.dart';
 import 'package:tsetse/views/authentication/permission.dart';
 
 class NameScreen extends StatelessWidget {
