@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:tsetse/views/buddy_screen.dart';
 
 class FaceVerifactionscreen extends StatefulWidget {
   const FaceVerifactionscreen({super.key});
@@ -8,6 +10,21 @@ class FaceVerifactionscreen extends StatefulWidget {
 }
 
 class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
+  Future<void> captureimage() async {
+    final ImagePicker picker = ImagePicker();
+
+    final XFile? image = await picker.pickImage(source: ImageSource.camera);
+
+    if (image != null) {
+      setState(() {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BuddyScreen()),
+        );
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +56,7 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: const LinearProgressIndicator(
-                            value: 1,
+                            value: 0.66,
                             backgroundColor: Colors.white,
                             color: Color(0xFF00A8A8),
                             minHeight: 6,
@@ -48,10 +65,7 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
                       ),
                     ),
                     const SizedBox(width: 5),
-                    const Text(
-                      "3/3",
-                      style: TextStyle(color: Colors.black54),
-                    ),
+                    const Text("2/3", style: TextStyle(color: Colors.black54)),
                   ],
                 ),
               ),
@@ -130,7 +144,6 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            // LEFT IMAGE + TEXT
                             Column(
                               children: [
                                 Container(
@@ -168,7 +181,6 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
                               ],
                             ),
 
-                            // RIGHT IMAGE + TEXT
                             Column(
                               children: [
                                 Container(
@@ -210,7 +222,6 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
 
                         const SizedBox(height: 30),
 
-                        // PHOTO BUTTON
                         SizedBox(
                           width: 220,
                           height: 50,
@@ -221,7 +232,9 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
                                 borderRadius: BorderRadius.circular(30),
                               ),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              captureimage();
+                            },
                             child: const Text(
                               "Next",
                               style: TextStyle(

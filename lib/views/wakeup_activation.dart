@@ -230,7 +230,7 @@ class _WakeupActivationState extends State<WakeupActivation> {
     );
   }
 
-  void showCapturedImageSheet(BuildContext context) {
+  void  showCapturedImageSheet(BuildContext context) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
