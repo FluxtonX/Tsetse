@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tsetse/core/utils/app_colors.dart';
+import 'package:tsetse/views/addalaram_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,51 +10,46 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
-      // ---------- Floating Add Button ----------
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        width: 58,
-        height: 58,
-        decoration: BoxDecoration(
-          color: const Color(0xFF00C4CC),
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
-            ),
-          ],
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 20),
+        child: Container(
+          width: 70,
+          height: 70,
+          decoration: BoxDecoration(shape: BoxShape.circle),
+          child: FloatingActionButton(
+            shape: CircleBorder(),
+            backgroundColor: AppColors.Tsetsecolor,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddAlarmScreen()),
+              );
+            },
+            child: const Icon(Icons.add, size: 32, color: Colors.white),
+          ),
         ),
-        child: const Icon(Icons.add, color: Colors.white, size: 32),
       ),
 
-      // ---------- Bottom Navigation Bar ----------
-      bottomNavigationBar: Container(
-        height: 70,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(40),
-            topRight: Radius.circular(40),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+
+      bottomNavigationBar: Padding(
+        padding: EdgeInsets.only(bottom: 30),
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: 20),
+          height: 65,
+          decoration: BoxDecoration(
+            color: AppColors.Tsetsecolor,
+            borderRadius: BorderRadius.circular(40),
           ),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 12,
-              offset: const Offset(0, -3),
-            ),
-          ],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
-            NavItem(icon: Icons.alarm, label: 'Alarm'),
-            NavItem(icon: Icons.photo, label: 'Gallery'),
-            SizedBox(width: 40), // empty space for FAB
-            NavItem(icon: Icons.group, label: 'Buzz Buddy'),
-            NavItem(icon: Icons.settings, label: 'Setting'),
-          ],
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              BottomIcon(icon: Icons.alarm, label: "Alarm"),
+              BottomIcon(icon: Icons.photo, label: "Gallery"),
+              BottomIcon(icon: Icons.group, label: "Buzz Buddy"),
+              BottomIcon(icon: Icons.settings, label: "Setting"),
+            ],
+          ),
         ),
       ),
 
@@ -80,52 +77,50 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
-                  const Text(
-                    "TSETSE",
-                    style: TextStyle(
-                      fontSize: 32,
-                      color: Color(0xFF00A8A8),
-                      fontWeight: FontWeight.bold,
-                    ),
+                  const SizedBox(height: 40),
+                  Row(
+                    children: [
+                      const Text(
+                        "TSETSE",
+                        style: TextStyle(
+                          fontSize: 32,
+                          color: Color(0xFF00A8A8),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 160),
+                        child: Container(
+                          height: 27,
+                          width: 57,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            border: Border.all(color: AppColors.subtittlecolor),
+                          ),
+                          child: Center(
+                            child: const Text(
+                              "Test Alarm",
+                              style: TextStyle(
+                                fontSize: 08,
+                                color: AppColors.Tsetsecolor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+
                   const SizedBox(height: 5),
                   const Text(
                     "The Alarm That Won’t Let You Sleep",
-                    style: TextStyle(fontSize: 15, color: Colors.black54),
-                  ),
-
-                  const SizedBox(height: 18),
-
-                  // Test Alarm Button
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 6,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.teal),
-                      ),
-                      child: const Text(
-                        "Test Alarm",
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.teal,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
+                    style: TextStyle(fontSize: 18, color: Colors.black54),
                   ),
                 ],
               ),
             ),
 
-            const SizedBox(height: 20),
-
-            // ========== ALARM CARD ===========
             Expanded(
               child: Container(
                 width: double.infinity,
@@ -136,7 +131,53 @@ class HomeScreen extends StatelessWidget {
                     topRight: Radius.circular(55),
                   ),
                 ),
-                child: Column(children: [AlarmCard()]),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Row(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 6,
+                            ),
+                            decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Color(0xFF00A8A8),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                              color: const Color(0xFFE0F7FA),
+                              borderRadius: BorderRadius.circular(20),
+                              border: Border.all(color: AppColors.Tsetsecolor),
+                            ),
+                            child: const Text(
+                              "Pro Feature",
+                              style: TextStyle(
+                                color: Color(0xFF00A8A8),
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                          const Spacer(),
+                          const Text(
+                            "15",
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(width: 5),
+                          const Icon(
+                            Icons.monetization_on,
+                            color: Colors.amber,
+                          ),
+                        ],
+                      ),
+                    ),
+                    AlarmCard(),
+                  ],
+                ),
               ),
             ),
           ],
@@ -146,9 +187,6 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ==========================================================
-// ALARM CARD WIDGET (Exact design)
-// ==========================================================
 class AlarmCard extends StatelessWidget {
   const AlarmCard({super.key});
 
@@ -168,45 +206,14 @@ class AlarmCard extends StatelessWidget {
           ),
         ],
         border: Border(
-          bottom: BorderSide(
-            color: const Color(0xFF00C4CC),
-            width: 2, // **this is the colored bottom line**
-          ),
+          bottom: BorderSide(color: const Color(0xFF00C4CC), width: 2),
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // ========== TOP ROW (Pro + Coins) ===========
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 6,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFE0F7FA),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Text(
-                  "Pro Feature",
-                  style: TextStyle(
-                    color: Color(0xFF00A8A8),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-              ),
-              const Spacer(),
-              const Text("15", style: TextStyle(fontWeight: FontWeight.bold)),
-              const SizedBox(width: 5),
-              const Icon(Icons.monetization_on, color: Colors.amber),
-            ],
-          ),
-
           const SizedBox(height: 15),
 
-          // ========== 80% text ===========
           Row(
             children: [
               Container(
@@ -229,7 +236,6 @@ class AlarmCard extends StatelessWidget {
 
           const SizedBox(height: 14),
 
-          // ========== Days ===========
           const Text(
             "S  M  T  W  T  S",
             style: TextStyle(
@@ -241,7 +247,6 @@ class AlarmCard extends StatelessWidget {
 
           const SizedBox(height: 10),
 
-          // ========== Alarm Row ===========
           Row(
             children: [
               const Text(
@@ -254,15 +259,30 @@ class AlarmCard extends StatelessWidget {
               const Icon(Icons.more_vert),
             ],
           ),
+          Container(
+            height: 20,
+            width: 50,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(color: AppColors.Tsetsecolor),
+            ),
+            child: Center(
+              child: const Text(
+                "Buzz Mode",
+                style: TextStyle(
+                  fontSize: 08,
+                  color: AppColors.subtittlecolor,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
 
-// ==========================================================
-// Bottom Nav Item Widget
-// ==========================================================
 class NavItem extends StatelessWidget {
   final IconData icon;
   final String label;
@@ -276,6 +296,25 @@ class NavItem extends StatelessWidget {
       children: [
         Icon(icon, size: 28, color: Colors.black87),
         Text(label, style: const TextStyle(fontSize: 12)),
+      ],
+    );
+  }
+}
+
+class BottomIcon extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const BottomIcon({super.key, required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(icon, color: Colors.white, size: 20),
+        const SizedBox(height: 4),
+        Text(label, style: const TextStyle(color: Colors.white, fontSize: 8)),
       ],
     );
   }

@@ -3,12 +3,20 @@ import 'package:tsetse/Widgets/reusbale_textfield.dart';
 import 'package:tsetse/Widgets/reuseable_passwordfield.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart';
+import 'package:tsetse/views/authentication/firebaseauthenrication_Screen.dart';
 
 import 'package:tsetse/views/authentication/otp_screen.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final emaiController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,10 +122,12 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: 10),
 
                       ReusableTextField(
+                        controller: emaiController,
                         hintText: 'Enter your Email',
                         icon: Icons.email,
                       ),
                       ReuseablePasswordfield(
+                        controller: passwordController,
                         hintText: 'Enter your password',
                         prefixIcon: Icons.lock,
                         suffixIcon: Icons.remove_red_eye,
@@ -141,6 +151,13 @@ class LoginScreen extends StatelessWidget {
                         text: 'Login',
                         backgroundColor: AppColors.Tsetsecolor,
                         onTap: () {
+                          setState(() {
+                            SignInWithEmialandPassword(
+                              emaiController.text,
+                              passwordController.text,
+                            );
+                          });
+
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(

@@ -4,8 +4,16 @@ import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart';
 import 'package:tsetse/views/authentication/permission.dart';
 
-class NameScreen extends StatelessWidget {
+class NameScreen extends StatefulWidget {
   const NameScreen({super.key});
+
+  @override
+  State<NameScreen> createState() => _NameScreenState();
+}
+
+class _NameScreenState extends State<NameScreen> {
+    final nameController = TextEditingController();
+
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +119,9 @@ class NameScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 10),
 
-                      ReusableTextField(hintText: 'Name', icon: Icons.person),
+                      ReusableTextField(
+                        controller: nameController,
+                        hintText: 'Name', icon: Icons.person),
 
                       const SizedBox(height: 200),
                       Reusablebutton(

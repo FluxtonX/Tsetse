@@ -1,14 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:tsetse/Widgets/reusbale_textfield.dart';
 import 'package:tsetse/Widgets/reuseable_passwordfield.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart';
+import 'package:tsetse/views/authentication/firebaseauthenrication_Screen.dart';
 
 import 'package:tsetse/views/authentication/otp_screen.dart';
 
-class RegistrationScreen extends StatelessWidget {
+class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
+
+  @override
+  State<RegistrationScreen> createState() => _RegistrationScreenState();
+}
+
+class _RegistrationScreenState extends State<RegistrationScreen> {
+  final nameController = TextEditingController();
+  final emaiController = TextEditingController();
+  final passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -99,17 +108,25 @@ class RegistrationScreen extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                       SizedBox(height: 10),
-                      ReusableTextField(hintText: 'Name', icon: Icons.person),
                       ReusableTextField(
+                        controller: nameController,
+                        hintText: 'Name',
+                        icon: Icons.person,
+                      ),
+                      ReusableTextField(
+                        controller: emaiController,
                         hintText: 'Enter your Email',
                         icon: Icons.email,
                       ),
                       ReuseablePasswordfield(
+                        controller: passwordController,
+
                         hintText: 'Enter your password',
                         prefixIcon: Icons.lock,
                         suffixIcon: Icons.remove_red_eye,
                       ),
                       ReuseablePasswordfield(
+                        controller: passwordController,
                         hintText: 'Confirm Password',
                         prefixIcon: Icons.lock,
                         suffixIcon: Icons.remove_red_eye,
@@ -120,12 +137,28 @@ class RegistrationScreen extends StatelessWidget {
                         text: 'Signup',
                         backgroundColor: AppColors.Tsetsecolor,
                         onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const OtpScreen(),
-                            ),
-                          );
+                          setState(() {
+                            if (emaiController.text.isEmpty ||
+                                passwordController.text.isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Please Fill all Fields'),
+                                ),
+                              );
+                              return;
+                            } else {
+                              signUpWithEmailPassword(
+                                emaiController.text.trim(),
+                                passwordController.text.trim(),
+                              );
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const OtpScreen(),
+                                ),
+                              );
+                            }
+                          });
                         },
                       ),
                       const SizedBox(height: 15),

@@ -5,12 +5,14 @@ class ReusableTextField extends StatelessWidget {
   final String hintText;
   final IconData icon;
   final bool obscureText;
+  final TextEditingController controller;
 
   const ReusableTextField({
     super.key,
     required this.hintText,
     required this.icon,
     this.obscureText = false,
+    required this.controller,
   });
 
   @override
@@ -31,6 +33,7 @@ class ReusableTextField extends StatelessWidget {
           ),
         ),
         child: TextField(
+          controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
             hintText: hintText,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "257914575293",
+    "project_id": "project-cost-calculator-5c3be",
+    "storage_bucket": "project-cost-calculator-5c3be.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:257914575293:android:2c8fc3cd5c32e0f9545ad4",
+        "android_client_info": {
+          "package_name": "com.example.tsetse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXNzMO1PA6tzLEmlmH-z5509fGtXHjomA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

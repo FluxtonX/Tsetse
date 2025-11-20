@@ -5,11 +5,13 @@ class ReuseablePasswordfield extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
   final IconData? suffixIcon;
+   final TextEditingController controller;
   const ReuseablePasswordfield({
     super.key,
     required this.hintText,
     required this.prefixIcon,
     this.suffixIcon,
+    required this.controller,
   });
 
   @override
@@ -30,6 +32,7 @@ class ReuseablePasswordfield extends StatelessWidget {
           ),
         ),
         child: TextField(
+          controller: controller,
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(color: Color.fromRGBO(154, 154, 154, 1)),
