@@ -150,6 +150,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                               signUpWithEmailPassword(
                                 emaiController.text.trim(),
                                 passwordController.text.trim(),
+                                nameController.text,
                               );
                               Navigator.pushReplacement(
                                 context,

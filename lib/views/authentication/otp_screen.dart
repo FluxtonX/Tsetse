@@ -142,7 +142,7 @@ class OtpScreen extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Permission(),
+                              builder: (context) => PermissionScreen(),
                             ),
                           );
                         },

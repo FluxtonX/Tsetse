@@ -12,8 +12,7 @@ class NameScreen extends StatefulWidget {
 }
 
 class _NameScreenState extends State<NameScreen> {
-    final nameController = TextEditingController();
-
+  final nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +120,9 @@ class _NameScreenState extends State<NameScreen> {
 
                       ReusableTextField(
                         controller: nameController,
-                        hintText: 'Name', icon: Icons.person),
+                        hintText: 'Name',
+                        icon: Icons.person,
+                      ),
 
                       const SizedBox(height: 200),
                       Reusablebutton(
@@ -131,7 +132,7 @@ class _NameScreenState extends State<NameScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Permission(),
+                              builder: (context) => PermissionScreen(),
                             ),
                           );
                         },

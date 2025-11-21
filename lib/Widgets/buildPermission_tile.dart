@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 Widget buildPermissionTile({
   required IconData icon,
@@ -6,13 +7,16 @@ Widget buildPermissionTile({
   required String subtitle,
   required bool value,
   required Color color,
+  required VoidCallback onTap,
 }) {
   return Container(
-    margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 20),
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
+    margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
+    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
     decoration: BoxDecoration(
-      border: Border.all(color: color, width: 1.2),
       borderRadius: BorderRadius.circular(15),
+      border: Border(
+        bottom: BorderSide(color: const Color(0xFF00C4CC), width: 2),
+      ),
     ),
     child: Row(
       children: [
@@ -41,7 +45,17 @@ Widget buildPermissionTile({
             ],
           ),
         ),
-        Switch(value: value, onChanged: (_) {}, activeColor: color),
+        Switch(
+          value: value,
+          onChanged: (val) {
+            if (val == true) {
+              onTap();
+            } else {
+              openAppSettings();
+            }
+          },
+          activeColor: color,
+        ),
       ],
     ),
   );

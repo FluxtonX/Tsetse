@@ -1,13 +1,70 @@
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:tsetse/Widgets/buildPermission_tile.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/alerttime_screen.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart'
     show Reusablebutton;
+import 'package:tsetse/views/authentication/permission.dart'
+    as permission_handler;
 
+class PermissionScreen extends StatefulWidget {
+  PermissionScreen({super.key});
 
-class Permission extends StatelessWidget {
-  const Permission({super.key});
+  @override
+  State<PermissionScreen> createState() => _PermissionScreenState();
+}
+
+class _PermissionScreenState extends State<PermissionScreen> {
+  bool cameraGranted = false;
+
+  bool notificationGranted = false;
+
+  bool locationGranted = false;
+
+  bool contactsGranted = false;
+
+  Future<void> requestcameraPermission() async {
+    var status = await Permission.camera.request();
+    setState(() {
+      cameraGranted = status.isGranted;
+    });
+  }
+
+  Future<void> notificationRequest() async {
+    var status = await Permission.notification.request();
+    setState(() {
+      notificationGranted = status.isGranted;
+    });
+  }
+
+  Future<void> locationPermission() async {
+    var status = await Permission.location.request();
+    setState(() {
+      locationGranted = status.isGranted;
+    });
+  }
+
+  Future<void> contactsPermission() async {
+    var status = await Permission.contacts.request();
+    setState(() {
+      contactsGranted = status.isGranted;
+    });
+  }
+
+  Future<void> allowAllPermissions() async {
+    var camera = await Permission.camera.request();
+    var notification = await Permission.notification.request();
+    var location = await Permission.location.request();
+    var contacts = await Permission.contacts.request();
+
+    setState(() {
+      cameraGranted = camera.isGranted;
+      notificationGranted = notification.isGranted;
+      locationGranted = location.isGranted;
+      contactsGranted = contacts.isGranted;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +98,7 @@ class Permission extends StatelessWidget {
               ),
             ),
 
-            SizedBox(height: 30),
+            SizedBox(height: 20),
 
             Container(
               height: 74,
@@ -57,7 +114,7 @@ class Permission extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 5),
             const Text(
               "TSETSE",
               style: TextStyle(
@@ -66,7 +123,7 @@ class Permission extends StatelessWidget {
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 15),
+            const SizedBox(height: 10),
             // Spacer(),
             Expanded(
               flex: 1,
@@ -85,14 +142,13 @@ class Permission extends StatelessWidget {
                     children: [
                       SizedBox(height: 20),
                       Text(
-                        'Permissions Setup',
+                        'Permission',
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w700,
                           color: AppColors.subtittlecolor,
                         ),
                       ),
-                      SizedBox(height: 10),
                       Text(
                         'We need these to help you wake up',
                         style: TextStyle(color: AppColors.subtittlecolor),
@@ -103,43 +159,94 @@ class Permission extends StatelessWidget {
                         icon: Icons.camera_alt,
                         title: "Camera",
                         subtitle: "To verify your wake up selfies",
-                        value: true,
+                        value: cameraGranted,
                         color: AppColors.Tsetsecolor,
+                        onTap: () {
+                          requestcameraPermission();
+                        },
                       ),
+                      SizedBox(height: 10),
+
                       buildPermissionTile(
                         icon: Icons.notifications_none,
                         title: "Notification",
                         subtitle: "For pre alarm reminders",
-                        value: false,
+                        value: notificationGranted,
                         color: AppColors.Tsetsecolor,
+                        onTap: () {
+                          notificationRequest();
+                        },
                       ),
+                      SizedBox(height: 10),
+
                       buildPermissionTile(
                         icon: Icons.location_on_outlined,
                         title: "Location",
                         subtitle: "To alert your Buzz buddy if you oversleep",
-                        value: false,
+                        value: locationGranted,
                         color: AppColors.Tsetsecolor,
+                        onTap: () {
+                          locationPermission();
+                        },
                       ),
+                      SizedBox(height: 10),
+
                       buildPermissionTile(
                         icon: Icons.phone,
                         title: "Contacts",
                         subtitle: "To connect your Buzz buddy",
-                        value: false,
+                        value: contactsGranted,
                         color: AppColors.Tsetsecolor,
+                        onTap: () {
+                          contactsPermission();
+                        },
                       ),
-                      SizedBox(height: 60),
+                      SizedBox(height: 40),
 
                       Reusablebutton(
-                        text: 'Next',
+                        text: 'Allow All&continue',
                         backgroundColor: AppColors.Tsetsecolor,
+                        onTap: () async {
+                          await allowAllPermissions();
+
+                          if (cameraGranted &&
+                              notificationGranted &&
+                              locationGranted &&
+                              contactsGranted) {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AlarmTimeScreen(),
+                              ),
+                            );
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Please allow all permissions to continue.",
+                                ),
+                              ),
+                            );
+                          }
+                        },
+                      ),
+                      SizedBox(height: 10),
+                      GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacement(
+                          Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const AlarmTimeScreen(),
+                              builder: (context) => AlarmTimeScreen(),
                             ),
                           );
                         },
+                        child: Text(
+                          'Skip for now',
+                          style: TextStyle(
+                            color: AppColors.Tsetsecolor,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -152,5 +259,3 @@ class Permission extends StatelessWidget {
     );
   }
 }
-
-

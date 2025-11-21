@@ -1,26 +1,36 @@
 {
   "project_info": {
-    "project_number": "257914575293",
-    "project_id": "project-cost-calculator-5c3be",
-    "storage_bucket": "project-cost-calculator-5c3be.firebasestorage.app"
+    "project_number": "327384831196",
+    "project_id": "rivan-5e684",
+    "storage_bucket": "rivan-5e684.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:257914575293:android:2c8fc3cd5c32e0f9545ad4",
+        "mobilesdk_app_id": "1:327384831196:android:361c60e66fc4dc03891019",
         "android_client_info": {
           "package_name": "com.example.tsetse"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "327384831196-mi0is2o6u9majf9hfsoajmocjivhfdt1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyBXNzMO1PA6tzLEmlmH-z5509fGtXHjomA"
+          "current_key": "AIzaSyBkou3miFEK3Z6oQlMCgo9ks69aZVZTZqQ"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "327384831196-mi0is2o6u9majf9hfsoajmocjivhfdt1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

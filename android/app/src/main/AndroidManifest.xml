@@ -1,9 +1,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- Camera permission -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!-- Needed for Android 13+ -->
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+
+      <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+       <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+         <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+        <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+
 
     <application
         android:name="${applicationName}"
@@ -31,17 +38,6 @@
             </intent-filter>
 
         </activity>
-
-        <!-- ⭐ REQUIRED for ImagePicker (Fixes camera not opening) -->
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
 
         <meta-data
             android:name="flutterEmbedding"

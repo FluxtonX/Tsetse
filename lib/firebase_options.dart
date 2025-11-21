@@ -47,30 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB59mNbnrfvyYw6_ZXDJ6xspa5bBoDo1jY',
-    appId: '1:257914575293:web:8a68a29698a57437545ad4',
-    messagingSenderId: '257914575293',
-    projectId: 'project-cost-calculator-5c3be',
-    authDomain: 'project-cost-calculator-5c3be.firebaseapp.com',
-    storageBucket: 'project-cost-calculator-5c3be.firebasestorage.app',
-    measurementId: 'G-SCQ4PGCX23',
+    apiKey: 'AIzaSyDVXRaj8EKZXrSjDztfc8DmaNdx2ulqR84',
+    appId: '1:327384831196:web:3ae303746681353f891019',
+    messagingSenderId: '327384831196',
+    projectId: 'rivan-5e684',
+    authDomain: 'rivan-5e684.firebaseapp.com',
+    storageBucket: 'rivan-5e684.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBXNzMO1PA6tzLEmlmH-z5509fGtXHjomA',
-    appId: '1:257914575293:android:2c8fc3cd5c32e0f9545ad4',
-    messagingSenderId: '257914575293',
-    projectId: 'project-cost-calculator-5c3be',
-    storageBucket: 'project-cost-calculator-5c3be.firebasestorage.app',
+    apiKey: 'AIzaSyBkou3miFEK3Z6oQlMCgo9ks69aZVZTZqQ',
+    appId: '1:327384831196:android:361c60e66fc4dc03891019',
+    messagingSenderId: '327384831196',
+    projectId: 'rivan-5e684',
+    storageBucket: 'rivan-5e684.firebasestorage.app',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB59mNbnrfvyYw6_ZXDJ6xspa5bBoDo1jY',
-    appId: '1:257914575293:web:74e53a70eb4971a8545ad4',
-    messagingSenderId: '257914575293',
-    projectId: 'project-cost-calculator-5c3be',
-    authDomain: 'project-cost-calculator-5c3be.firebaseapp.com',
-    storageBucket: 'project-cost-calculator-5c3be.firebasestorage.app',
-    measurementId: 'G-FJKGGXZ9JL',
+    apiKey: 'AIzaSyDVXRaj8EKZXrSjDztfc8DmaNdx2ulqR84',
+    appId: '1:327384831196:web:ca90834a69695106891019',
+    messagingSenderId: '327384831196',
+    projectId: 'rivan-5e684',
+    authDomain: 'rivan-5e684.firebaseapp.com',
+    storageBucket: 'rivan-5e684.firebasestorage.app',
   );
+
 }
