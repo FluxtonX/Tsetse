@@ -43,3 +43,11 @@ Future<void> SignInWithEmialandPassword(String email, String password) async {
     final user = UserModel.fromMap(doc.data()!);
   } catch (e) {}
 }
+
+Future<void> signOutUser() async {
+  try {
+    await FirebaseAuth.instance.signOut();
+  } catch (e) {
+    print("Error signing out: $e");
+  }
+}

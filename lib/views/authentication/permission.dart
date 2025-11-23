@@ -5,8 +5,7 @@ import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/alerttime_screen.dart';
 import 'package:tsetse/views/authentication/auth_screen.dart'
     show Reusablebutton;
-import 'package:tsetse/views/authentication/permission.dart'
-    as permission_handler;
+import 'package:tsetse/views/authentication/firebaseauthenrication_Screen.dart';
 
 class PermissionScreen extends StatefulWidget {
   PermissionScreen({super.key});
@@ -83,19 +82,29 @@ class _PermissionScreenState extends State<PermissionScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SizedBox(height: 50),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Permissions \nSetup',
-                  style: TextStyle(
-                    fontSize: 34,
-                    color: AppColors.Tsetsecolor,
-                    fontWeight: FontWeight.bold,
+            Row(
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
+                      'Permissions \nSetup',
+                      style: TextStyle(
+                        fontSize: 34,
+                        color: AppColors.Tsetsecolor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                GestureDetector(
+                  onTap: () {
+                    signOutUser();
+                  },
+                  child: Text('Log out'),
+                ),
+              ],
             ),
 
             SizedBox(height: 20),
