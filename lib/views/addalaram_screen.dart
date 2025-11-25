@@ -1,236 +1,319 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tsetse/core/utils/app_colors.dart';
 
-class AddAlarmScreen extends StatelessWidget {
+class AddAlarmScreen extends StatefulWidget {
   const AddAlarmScreen({super.key});
 
   @override
+  State<AddAlarmScreen> createState() => _AddAlarmScreenState();
+}
+
+class _AddAlarmScreenState extends State<AddAlarmScreen> {
+  DateTime selectedTime = DateTime.now();
+
+  bool snooze = false;
+  bool buzz = false;
+  bool buddy = false;
+  bool spy = false;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F7F8),
-
-      // Custom Appbar
-      appBar: AppBar(
-        backgroundColor: const Color(0xFFF5F7F8),
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
-          onPressed: () => Navigator.pop(context),
-        ),
-        title: const Text(
-          "Add Alarm",
-          style: TextStyle(
-            fontSize: 20,
-            color: Color(0xFF007C7C),
-            fontWeight: FontWeight.bold,
+      body: Container(
+        height: double.infinity,
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFFE3F6F5), Color(0xFFB3E5FC)],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-        centerTitle: true,
-      ),
-
-      body: SingleChildScrollView(
         child: Column(
           children: [
+            SizedBox(height: 50),
+            Row(
+              children: [
+                SizedBox(width: 20),
+                const Icon(
+                  Icons.arrow_back_sharp,
+                  color: AppColors.subtittlecolor,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 100),
+                  child: Text(
+                    'Add Alarm',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.Tsetsecolor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+
             const SizedBox(height: 10),
 
             // Gradient Top Section
             Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(22),
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [Color(0xFFE3F6F5), Color(0xFFB3E5FC)],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(55),
-                  bottomRight: Radius.circular(55),
-                ),
+              height: 93,
+              width: 345,
+              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(21),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black12,
+                    blurRadius: 8,
+                    offset: Offset(0, 3),
+                  ),
+                ],
               ),
-              child: Column(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  // Alarm Label card
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 18,
-                      vertical: 18,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Alarm Lable",
+                        style: TextStyle(fontSize: 15, color: Colors.black54),
+                      ),
+                      SizedBox(height: 6),
+                      Row(
+                        children: [
+                          Icon(Icons.wb_sunny, color: Colors.amber),
+                          SizedBox(width: 6),
+                          Text(
+                            "Morning class, gym, etc..",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  const Icon(Icons.edit, size: 18),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 30),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Container(
+                  width: double.infinity,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(55),
+                      topRight: Radius.circular(55),
                     ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(18),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black12,
-                          blurRadius: 8,
-                          offset: Offset(0, 3),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 30),
+
+                      // Time picker
+                      SizedBox(
+                        height: 150,
+                        child: CupertinoTheme(
+                          data: const CupertinoThemeData(
+                            brightness: Brightness.light,
+                          ),
+                          child: CupertinoDatePicker(
+                            mode: CupertinoDatePickerMode.time,
+                            initialDateTime: selectedTime,
+                            use24hFormat: false,
+                            onDateTimeChanged: (DateTime newTime) {
+                              setState(() {
+                                selectedTime = newTime;
+                              });
+                            },
+                          ),
                         ),
-                      ],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
-                            Text(
-                              "Alarm Lable",
+                      ),
+                      // Repeat Section
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 22),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              "Repeat",
                               style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.black54,
+                                fontSize: 18,
+                                color: Colors.black87,
+                                fontWeight: FontWeight.w600,
                               ),
                             ),
-                            SizedBox(height: 6),
                             Row(
                               children: [
-                                Icon(Icons.wb_sunny, color: Colors.amber),
-                                SizedBox(width: 6),
-                                Text(
-                                  "Morning class, gym, etc..",
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black87,
-                                  ),
+                                Radio(
+                                  value: true,
+                                  groupValue: true,
+                                  onChanged: (v) {},
+                                  activeColor: Color(0xFF00C4CC),
+                                ),
+                                const Text(
+                                  "Everyday",
+                                  style: TextStyle(fontSize: 15),
                                 ),
                               ],
                             ),
                           ],
                         ),
-                        const Icon(Icons.edit, size: 18),
-                      ],
-                    ),
-                  ),
+                      ),
+                      const SizedBox(height: 10),
 
-                  const SizedBox(height: 30),
+                      // Weekday Selector
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          _day("S"),
+                          _day("M"),
+                          _day("T"),
+                          _day("W"),
+                          _day("T"),
+                          _day("F"),
+                          _day("S"),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
 
-                  // Time Selector Wheel Cards
-                  Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(35),
-                    ),
-                    child: Column(
-                      children: const [
-                        Text(
-                          "05 : 29",
-                          style: TextStyle(fontSize: 26, color: Colors.grey),
+                      _settingTile(
+                        Icons.camera_alt,
+                        "Stop with Photo",
+                        "Clear background using same object",
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(
+                          color: AppColors.Tsetsecolor,
+                          thickness: 1,
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          "06 : 30 AM",
-                          style: TextStyle(
-                            fontSize: 32,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                      ),
+
+                      _settingTile(
+                        Icons.music_note,
+                        "Sounds",
+                        "Angry Swarm Tsetse",
+                        trailingIcon: Icons.chevron_right,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(
+                          color: AppColors.Tsetsecolor,
+                          thickness: 1,
+                        ),
+                      ),
+                      _settingTile(
+                        Icons.snooze,
+                        "Snooze",
+                        "5 minutes",
+                        showSwitch: true,
+                        switchValue: snooze,
+                        onToggle: (value) {
+                          setState(() {
+                            snooze = value;
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(
+                          color: AppColors.Tsetsecolor,
+                          thickness: 1,
+                        ),
+                      ),
+                      _settingTile(
+                        Icons.notifications_active,
+                        "Buzz Mode",
+                        "10mins before pre-alarm notification",
+                        showSwitch: true,
+                        switchValue: buzz,
+                        onToggle: (value) {
+                          setState(() {
+                            buzz = value;
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(
+                          color: AppColors.Tsetsecolor,
+                          thickness: 1,
+                        ),
+                      ),
+                      _settingTile(
+                        Icons.group,
+                        "Buzz Buddy",
+                        "After 3 snooze your friend gets notified",
+                        showSwitch: true,
+                        switchValue: buddy,
+                        onToggle: (value) {
+                          setState(() {
+                            buddy = value;
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(
+                          color: AppColors.Tsetsecolor,
+                          thickness: 1,
+                        ),
+                      ),
+                      _settingTile(
+                        Icons.visibility,
+                        "Spy Mode",
+                        "Predicts your wake-up performance",
+                        showSwitch: true,
+                        switchValue: spy,
+                        onToggle: (value) {
+                          setState(() {
+                            spy = value;
+                          });
+                        },
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Divider(
+                          color: AppColors.Tsetsecolor,
+                          thickness: 1,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Save button
+                      SizedBox(
+                        width: 250,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF00C4CC),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                          onPressed: () {},
+                          child: const Text(
+                            "Save Alarm",
+                            style: TextStyle(color: Colors.white, fontSize: 17),
                           ),
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          "07 : 31 PM",
-                          style: TextStyle(fontSize: 26, color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 20),
-
-            // Repeat Section
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    "Repeat",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: true,
-                        groupValue: true,
-                        onChanged: (v) {},
-                        activeColor: Color(0xFF00C4CC),
                       ),
-                      const Text("Everyday", style: TextStyle(fontSize: 15)),
+
+                      const SizedBox(height: 30),
                     ],
                   ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 10),
-
-            // Weekday Selector
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                _day("S"),
-                _day("M"),
-                _day("T"),
-                _day("W"),
-                _day("T"),
-                _day("F"),
-                _day("S"),
-              ],
-            ),
-
-            const SizedBox(height: 20),
-
-            _settingTile(
-              Icons.camera_alt,
-              "Stop with Photo",
-              "Clear background using same object",
-            ),
-            _settingTile(Icons.music_note, "Sounds", "Angry Swarm Tsetse"),
-            _settingTile(Icons.snooze, "Snooze", "5 minutes"),
-            _settingTile(
-              Icons.notifications_active,
-              "Buzz Mode",
-              "10mins before pre-alarm notification",
-            ),
-            _settingTile(
-              Icons.group,
-              "Buzz Buddy",
-              "After 3 snooze your friend gets notified",
-            ),
-            _settingTile(
-              Icons.visibility,
-              "Spy Mode",
-              "Predicts your wake-up performance",
-            ),
-
-            const SizedBox(height: 20),
-
-            // Save button
-            Container(
-              width: 250,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00C4CC),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                onPressed: () {},
-                child: const Text(
-                  "Save Alarm",
-                  style: TextStyle(color: Colors.white, fontSize: 17),
                 ),
               ),
             ),
-
-            const SizedBox(height: 30),
           ],
         ),
       ),
@@ -238,29 +321,42 @@ class AddAlarmScreen extends StatelessWidget {
   }
 
   // Reusable setting tile
-  Widget _settingTile(IconData icon, String title, String subtitle) {
+  Widget _settingTile(
+    IconData icon,
+    String title,
+    String subtitle, {
+    IconData? trailingIcon, // OPTIONAL
+    bool showSwitch = false,
+    bool switchValue = false,
+    ValueChanged<bool>? onToggle,
+  }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 2),
       child: Row(
         children: [
           Icon(icon, color: Color(0xFF00C4CC), size: 26),
           const SizedBox(width: 15),
+
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(fontSize: 13, color: Colors.black54),
+                  style: TextStyle(fontSize: 12, color: Colors.black54),
                 ),
               ],
             ),
           ),
-          const Icon(Icons.chevron_right),
+
+          if (showSwitch) Switch(value: switchValue, onChanged: onToggle),
+
+          // 🟩 TRAILING ICON (only if switch is NOT shown AND icon provided)
+          if (!showSwitch && trailingIcon != null) Icon(trailingIcon),
         ],
       ),
     );

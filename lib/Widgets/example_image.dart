@@ -8,7 +8,7 @@ class ExampleImage extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
 
-  const ExampleImage({
+  const ExampleImage({super.key, 
     required this.imagePath,
     required this.innerPath,
     required this.label,

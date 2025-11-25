@@ -7,7 +7,7 @@ class MissionCard extends StatelessWidget {
   final String subtitle;
   final VoidCallback onTap;
 
-  const MissionCard({
+  const MissionCard({super.key, 
     required this.icon,
     required this.title,
     required this.subtitle,

@@ -8,7 +8,7 @@ import 'package:tsetse/views/authentication/auth_screen.dart'
 import 'package:tsetse/views/authentication/firebaseauthenrication_Screen.dart';
 
 class PermissionScreen extends StatefulWidget {
-  PermissionScreen({super.key});
+  const PermissionScreen({super.key});
 
   @override
   State<PermissionScreen> createState() => _PermissionScreenState();
@@ -45,7 +45,16 @@ class _PermissionScreenState extends State<PermissionScreen> {
   }
 
   Future<void> contactsPermission() async {
-    var status = await Permission.contacts.request();
+    final status = await Permission.contacts.request();
+
+    if (status.isDenied) {
+      await Permission.contacts.request();
+    }
+
+    if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+
     setState(() {
       contactsGranted = status.isGranted;
     });

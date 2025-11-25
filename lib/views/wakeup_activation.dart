@@ -239,7 +239,7 @@ class _WakeupActivationState extends State<WakeupActivation> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
       ),
       builder: (_) {
-        return Container(
+        return SizedBox(
           height: 700,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
