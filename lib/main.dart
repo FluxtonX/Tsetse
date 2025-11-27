@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tsetse/firebase_options.dart';
+import 'package:tsetse/views/alerttime_screen.dart';
 import 'package:tsetse/views/authentication/auth_wrapper.dart';
 import 'package:tsetse/views/pro_screen.dart';
+import 'package:tsetse/views/test_alarm.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

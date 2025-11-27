@@ -51,7 +51,11 @@ class OtpScreen extends StatelessWidget {
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Image.asset('assets/icons/fly2.png', width: 100, height: 100),
+                  Image.asset(
+                    'assets/images/fly2.png',
+                    width: 100,
+                    height: 100,
+                  ),
                 ],
               ),
             ),

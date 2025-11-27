@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:tsetse/Widgets/procontainer.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
-import 'package:tsetse/core/utils/svg_icon.dart';
-import 'package:tsetse/views/Pro_next.dart';
+import 'package:tsetse/views/Pro_tsetse.dart';
 
-class ProScreen extends StatefulWidget {
-  const ProScreen({super.key});
+class ProNext extends StatelessWidget {
+  const ProNext({super.key});
 
-  @override
-  State<ProScreen> createState() => _ProScreenState();
-}
-
-class _ProScreenState extends State<ProScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,11 +40,10 @@ class _ProScreenState extends State<ProScreen> {
                 ],
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
               child: Text(
-                'One alarm is enough with TSETSE Pro',
+                'Save 15 minutes with powerful Pro Features',
                 style: TextStyle(
                   fontSize: 34,
                   color: AppColors.Tsetsecolor,
@@ -58,14 +51,29 @@ class _ProScreenState extends State<ProScreen> {
                 ),
               ),
             ),
+            Row(
+              children: [
+                SizedBox(width: 26),
+                Icon(
+                  Icons.check_outlined,
+                  color: AppColors.Tsetsecolor,
+                  size: 25,
+                ),
+                SizedBox(width: 4),
+
+                Text(
+                  '10M+ wake up data analyzed',
+                  style: TextStyle(
+                    color: AppColors.subtittlecolor,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Image.asset('assets/images/Frame.png'),
             SizedBox(height: 30),
-
-            // pro button
-            pro_container(),
-            SizedBox(height: 20),
-
-            Image.asset('assets/images/Group 92.png'),
-            SizedBox(height: 100),
 
             SizedBox(
               width: 250,
@@ -80,7 +88,7 @@ class _ProScreenState extends State<ProScreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProNext()),
+                    MaterialPageRoute(builder: (context) => ProTsetse()),
                   );
                 },
                 child: const Text(
