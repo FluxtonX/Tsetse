@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/views/authentication/login_screen.dart';
@@ -8,10 +9,13 @@ class AuthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [AppColors.lightskyblue, AppColors.skyblue],
@@ -19,115 +23,127 @@ class AuthScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 140,
-              width: 140,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(34),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/fly2.png',
-                    width: 100,
-                    height: 100,
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              "TSETSE",
-              style: TextStyle(
-                color: AppColors.Tsetsecolor,
-                fontSize: 45,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            SizedBox(height: 30),
-            const Text(
-              "Welcome to TSETSE",
-              style: TextStyle(
-                color: AppColors.Tsetsecolor,
-                fontSize: 24,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 10),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 40),
-              child: Text(
-                "Our AI alarm that refuses to let you sleep your life away..",
-                style: TextStyle(
-                  color: AppColors.subtittlecolor,
-                  fontSize: 18,
-                  height: 1.5,
-                  fontWeight: FontWeight.w600,
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
 
-            // Align(
-            //   alignment: FractionalOffset(0.9, 0.2),
-            //   child: Padding(
-            //     padding: const EdgeInsets.symmetric(vertical: 0),
-            //     child: Transform.rotate(
-            //       angle: 0,
-            //       child: Image.asset('assets/icons/fly.png', height: 31),
-            //     ),
-            //   ),
-            // ),
-            SizedBox(height: 80),
-
-            GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const RegistrationScreen(),
+        /// ⭐ Prevent overflow in landscape
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: height),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // LOGO CONTAINER
+                Container(
+                  height: max(height * 0.18, 120),
+                  width: max(width * 0.38, 120),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(max(width * 0.08, 20)),
                   ),
-                );
-              },
-              child: Container(
-                height: 46,
-                width: 196,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(70),
-                  border: Border.all(color: AppColors.Tsetsecolor, width: 0.8),
-                ),
-                child: Center(
-                  child: Text(
-                    'Register',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.Tsetsecolor,
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/fly2.png',
+                      width: max(width * 0.25, 80),
+                      height: max(height * 0.12, 80),
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
-              ),
-            ),
 
-            SizedBox(height: 15),
+                SizedBox(height: max(height * 0.025, 20)),
 
-            Reusablebutton(
-              text: 'Login',
-              backgroundColor: AppColors.Tsetsecolor,
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
-              },
+                Text(
+                  "TSETSE",
+                  style: TextStyle(
+                    color: AppColors.Tsetsecolor,
+                    fontSize: max(width * 0.11, 32),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+
+                SizedBox(height: max(height * 0.03, 30)),
+
+                Text(
+                  "Welcome to TSETSE",
+                  style: TextStyle(
+                    color: AppColors.Tsetsecolor,
+                    fontSize: max(width * 0.06, 20),
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+
+                SizedBox(height: max(height * 0.01, 10)),
+
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: max(width * 0.1, 24),
+                  ),
+                  child: Text(
+                    "Our AI alarm that refuses to let you sleep your life away..",
+                    style: TextStyle(
+                      color: AppColors.subtittlecolor,
+                      fontSize: max(width * 0.04, 14),
+                      height: 1.5,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+
+                SizedBox(height: max(height * 0.1, 40)),
+
+                // REGISTER BUTTON
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const RegistrationScreen(),
+                      ),
+                    );
+                  },
+                  child: Container(
+                    height: max(height * 0.06, 42),
+                    width: max(width * 0.52, 180),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(70),
+                      border: Border.all(
+                        color: AppColors.Tsetsecolor,
+                        width: 0.8,
+                      ),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Register',
+                        style: TextStyle(
+                          fontSize: max(width * 0.04, 14),
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.Tsetsecolor,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: max(height * 0.02, 15)),
+
+                // LOGIN BUTTON
+                Reusablebutton(
+                  text: 'Login',
+                  backgroundColor: AppColors.Tsetsecolor,
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                ),
+
+                SizedBox(height: max(height * 0.03, 30)),
+              ],
             ),
-            SizedBox(width: 31),
-          ],
+          ),
         ),
       ),
     );
@@ -138,6 +154,7 @@ class Reusablebutton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final VoidCallback onTap;
+
   const Reusablebutton({
     required this.text,
     required this.backgroundColor,
@@ -147,11 +164,14 @@ class Reusablebutton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 46,
-        width: 196,
+        height: max(height * 0.06, 42),
+        width: max(width * 0.52, 180),
         decoration: BoxDecoration(
           color: backgroundColor,
           borderRadius: BorderRadius.circular(70),
@@ -160,7 +180,7 @@ class Reusablebutton extends StatelessWidget {
           child: Text(
             text,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: max(width * 0.04, 14),
               fontWeight: FontWeight.w600,
               color: Colors.white,
             ),

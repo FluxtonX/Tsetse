@@ -9,10 +9,13 @@ class OtpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [AppColors.lightskyblue, AppColors.skyblue],
@@ -20,143 +23,164 @@ class OtpScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(height: 50),
-            Align(
-              alignment: Alignment.topLeft,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Verification \nCode',
+        child: SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(minHeight: height),
+            child: Column(
+              children: [
+                SizedBox(height: height * 0.06),
+
+                // Top Text
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                    child: Text(
+                      'Verification \nCode',
+                      style: TextStyle(
+                        fontSize: width * 0.085,
+                        color: AppColors.Tsetsecolor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: height * 0.06),
+
+                // Logo
+                Container(
+                  height: height * 0.1,
+                  width: width * 0.2,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(width * 0.04),
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      'assets/images/fly2.png',
+                      width: width * 0.15,
+                      height: width * 0.15,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
+                ),
+
+                SizedBox(height: height * 0.02),
+
+                Text(
+                  "TSETSE",
                   style: TextStyle(
-                    fontSize: 34,
                     color: AppColors.Tsetsecolor,
-                    fontWeight: FontWeight.bold,
+                    fontSize: width * 0.08,
+                    fontWeight: FontWeight.w700,
                   ),
                 ),
-              ),
-            ),
 
-            SizedBox(height: 65),
+                SizedBox(height: height * 0.03),
 
-            Container(
-              height: 74,
-              width: 74,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/fly2.png',
-                    width: 100,
-                    height: 100,
+                // White bottom sheet
+                Container(
+                  width: width,
+                  height: height * 0.6,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(60),
+                      topRight: Radius.circular(60),
+                    ),
                   ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 15),
-            const Text(
-              "TSETSE",
-              style: TextStyle(
-                color: AppColors.Tsetsecolor,
-                fontSize: 34,
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            const SizedBox(height: 15),
-            // Spacer(),
-            Expanded(
-              flex: 1,
-              child: Container(
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
-                  ),
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 20),
-                      Text(
-                        'VERIFICATION',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.subtittlecolor,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'Please enter code send to;',
-                        style: TextStyle(color: AppColors.subtittlecolor),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        'Example@gmail.com',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 10),
-                      PinCodeTextField(
-                        appContext: context,
-                        length: 4,
-                        animationType: AnimationType.fade,
-                        pinTheme: PinTheme(
-                          shape: PinCodeFieldShape.underline,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+                    child: Column(
+                      children: [
+                        SizedBox(height: height * 0.03),
 
-                          fieldHeight: 70, // 👈 make taller if you want
-                          fieldWidth: 40,
-                          activeColor:
-                              AppColors.Tsetsecolor, // active line color
-                          inactiveColor:
-                              AppColors.Tsetsecolor, // default line color
-                          selectedColor: AppColors.Tsetsecolor, // when focused
+                        Text(
+                          'VERIFICATION',
+                          style: TextStyle(
+                            fontSize: width * 0.06,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.subtittlecolor,
+                          ),
                         ),
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        animationDuration: const Duration(milliseconds: 200),
-                        keyboardType: TextInputType.number,
-                        onChanged: (value) {},
-                      ),
 
-                      Text(
-                        'Change Email Account',
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          fontSize: 14,
+                        SizedBox(height: height * 0.015),
+
+                        Text(
+                          'Please enter code sent to:',
+                          style: TextStyle(
+                            color: AppColors.subtittlecolor,
+                            fontSize: width * 0.035,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
-                      ),
 
-                      const SizedBox(height: 120),
-                      Reusablebutton(
-                        text: 'Continue',
-                        backgroundColor: AppColors.Tsetsecolor,
-                        onTap: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => PermissionScreen(),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                        Text(
+                          'Example@gmail.com',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: width * 0.04,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+
+                        SizedBox(height: height * 0.02),
+
+                        // PIN Code Fields
+                        PinCodeTextField(
+                          appContext: context,
+                          length: 4,
+                          animationType: AnimationType.fade,
+                          pinTheme: PinTheme(
+                            shape: PinCodeFieldShape.underline,
+                            fieldHeight: height * 0.08,
+                            fieldWidth: width * 0.12,
+                            activeColor: AppColors.Tsetsecolor,
+                            inactiveColor: AppColors.Tsetsecolor,
+                            selectedColor: AppColors.Tsetsecolor,
+                          ),
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          animationDuration: const Duration(milliseconds: 200),
+                          keyboardType: TextInputType.number,
+                          onChanged: (value) {},
+                        ),
+
+                        SizedBox(height: height * 0.015),
+
+                        Text(
+                          'Change Email Account',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            fontSize: width * 0.035,
+                          ),
+                        ),
+
+                        SizedBox(height: height * 0.08),
+
+                        // Continue Button
+                        Reusablebutton(
+                          text: 'Continue',
+                          backgroundColor: AppColors.Tsetsecolor,
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PermissionScreen(),
+                              ),
+                            );
+                          },
+                        ),
+
+                        SizedBox(height: height * 0.04),
+                      ],
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

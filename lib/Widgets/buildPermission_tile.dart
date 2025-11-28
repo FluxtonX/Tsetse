@@ -8,12 +8,22 @@ Widget buildPermissionTile({
   required bool value,
   required Color color,
   required VoidCallback onTap,
+  required BuildContext context, // pass context for MediaQuery
 }) {
+  final width = MediaQuery.of(context).size.width;
+  final height = MediaQuery.of(context).size.height;
+
   return Container(
-    margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 20),
-    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+    margin: EdgeInsets.symmetric(
+      vertical: height * 0.001,
+      horizontal: width * 0.05,
+    ),
+    padding: EdgeInsets.symmetric(
+      horizontal: width * 0.01,
+      vertical: height * 0.002,
+    ),
     decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(15),
+      borderRadius: BorderRadius.circular(width * 0.04),
       border: Border(
         bottom: BorderSide(color: const Color(0xFF00C4CC), width: 2),
       ),
@@ -21,26 +31,29 @@ Widget buildPermissionTile({
     child: Row(
       children: [
         CircleAvatar(
-          radius: 22,
+          radius: width * 0.055,
           backgroundColor: color.withOpacity(0.1),
-          child: Icon(icon, color: color),
+          child: Icon(icon, color: color, size: width * 0.06),
         ),
-        const SizedBox(width: 16),
+        SizedBox(width: width * 0.04),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 15,
+                  fontSize: width * 0.04,
                 ),
               ),
-              const SizedBox(height: 2),
+              SizedBox(height: height * 0.004),
               Text(
                 subtitle,
-                style: TextStyle(fontSize: 13, color: Colors.grey[600]),
+                style: TextStyle(
+                  fontSize: width * 0.023,
+                  color: Colors.grey[600],
+                ),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
+import 'package:tsetse/views/Home_screen.dart';
 
 class AddAlarmScreen extends StatefulWidget {
   const AddAlarmScreen({super.key});
@@ -300,7 +301,14 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
                             ),
                             padding: const EdgeInsets.symmetric(vertical: 14),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(),
+                              ),
+                            );
+                          },
                           child: const Text(
                             "Save Alarm",
                             style: TextStyle(color: Colors.white, fontSize: 17),

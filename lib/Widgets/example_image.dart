@@ -1,4 +1,3 @@
-// Example image preview
 import 'package:flutter/material.dart';
 
 class ExampleImage extends StatelessWidget {
@@ -8,7 +7,8 @@ class ExampleImage extends StatelessWidget {
   final IconData icon;
   final Color iconColor;
 
-  const ExampleImage({super.key, 
+  const ExampleImage({
+    super.key,
     required this.imagePath,
     required this.innerPath,
     required this.label,
@@ -18,13 +18,16 @@ class ExampleImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Column(
       children: [
         Stack(
           children: [
             Container(
-              width: 172,
-              height: 237,
+              width: screenWidth * 0.40, // responsive width
+              height: screenHeight * 0.32, // responsive height
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage(imagePath),
@@ -32,13 +35,12 @@ class ExampleImage extends StatelessWidget {
                 ),
               ),
             ),
-
             Positioned(
-              top: 82,
-              left: 65,
+              top: screenHeight * 0.11,
+              left: screenWidth * 0.17,
               child: Container(
-                height: 50,
-                width: 45,
+                height: screenHeight * 0.065,
+                width: screenWidth * 0.11,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   image: DecorationImage(
@@ -50,13 +52,15 @@ class ExampleImage extends StatelessWidget {
             ),
           ],
         ),
-
-        const SizedBox(height: 8),
+        SizedBox(height: screenHeight * 0.01),
         Text(
           label,
-          style: const TextStyle(fontSize: 14, color: Colors.black54),
+          style: TextStyle(
+            fontSize: screenWidth * 0.035,
+            color: Colors.black54,
+          ),
         ),
-        Icon(icon, color: iconColor),
+        Icon(icon, color: iconColor, size: screenWidth * 0.07),
       ],
     );
   }

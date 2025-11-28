@@ -5,7 +5,8 @@ class ReuseablePasswordfield extends StatelessWidget {
   final String hintText;
   final IconData prefixIcon;
   final IconData? suffixIcon;
-   final TextEditingController controller;
+  final TextEditingController controller;
+
   const ReuseablePasswordfield({
     super.key,
     required this.hintText,
@@ -16,33 +17,49 @@ class ReuseablePasswordfield extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // MediaQuery dimensions
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(horizontal: width * 0.01),
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 3),
+        margin: EdgeInsets.symmetric(vertical: height * 0.005),
         decoration: BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.only(
-            bottomRight: Radius.circular(20),
-            bottomLeft: Radius.circular(20),
+            bottomRight: Radius.circular(width * 0.05),
+            bottomLeft: Radius.circular(width * 0.05),
           ),
-
           border: Border(
-            bottom: BorderSide(color: AppColors.Tsetsecolor, width: 1.5),
+            bottom: BorderSide(
+              color: AppColors.Tsetsecolor,
+              width: width * 0.004,
+            ),
           ),
         ),
         child: TextField(
           controller: controller,
+          obscureText: true,
+          style: TextStyle(fontSize: width * 0.04),
           decoration: InputDecoration(
             hintText: hintText,
-            hintStyle: TextStyle(color: Color.fromRGBO(154, 154, 154, 1)),
-
-            prefixIcon: Icon(prefixIcon, color: Colors.black),
-            suffixIcon: Icon(suffixIcon, color: Colors.black),
+            hintStyle: TextStyle(
+              color: Color.fromRGBO(154, 154, 154, 1),
+              fontSize: width * 0.04,
+            ),
+            prefixIcon: Icon(
+              prefixIcon,
+              color: Colors.black,
+              size: width * 0.06,
+            ),
+            suffixIcon: suffixIcon != null
+                ? Icon(suffixIcon, color: Colors.black, size: width * 0.06)
+                : null,
             border: InputBorder.none,
-            contentPadding: const EdgeInsets.symmetric(
-              horizontal: 16,
-              vertical: 14,
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: width * 0.04,
+              vertical: height * 0.018,
             ),
           ),
         ),

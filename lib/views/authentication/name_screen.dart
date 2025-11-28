@@ -16,6 +16,10 @@ class _NameScreenState extends State<NameScreen> {
 
   @override
   Widget build(BuildContext context) {
+    // MediaQuery dimensions
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -30,62 +34,63 @@ class _NameScreenState extends State<NameScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50),
+            SizedBox(height: height * 0.09),
             Align(
               alignment: Alignment.topLeft,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.05),
                 child: Text(
                   'Let’s Get Personal',
                   style: TextStyle(
-                    fontSize: 34,
+                    fontSize: width * 0.08,
                     color: AppColors.Tsetsecolor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ),
-
             Align(
               alignment: Alignment.bottomLeft,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.05),
                 child: Text(
                   'TSETSE needs your name — so it \nknows who to yell at in the morning.',
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: width * 0.035,
                     color: AppColors.subtittlecolor,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 65),
-
+            SizedBox(height: height * 0.08),
             Container(
-              height: 74,
-              width: 74,
+              height: height * 0.1,
+              width: height * 0.1,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(width * 0.04),
               ),
               child: Stack(
                 alignment: Alignment.center,
                 children: [
-                  Image.asset('assets/icons/fly2.png', width: 100, height: 100),
+                  Image.asset(
+                    'assets/images/fly2.png',
+                    width: width * 0.25,
+                    height: width * 0.25,
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 15),
-            const Text(
+            SizedBox(height: height * 0.02),
+            Text(
               "TSETSE",
               style: TextStyle(
                 color: AppColors.Tsetsecolor,
-                fontSize: 34,
+                fontSize: width * 0.08,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 15),
-            // Spacer(),
+            SizedBox(height: height * 0.02),
             Expanded(
               flex: 1,
               child: Container(
@@ -93,38 +98,39 @@ class _NameScreenState extends State<NameScreen> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
+                    topLeft: Radius.circular(width * 0.15),
+                    topRight: Radius.circular(width * 0.15),
                   ),
                 ),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 20),
+                      SizedBox(height: height * 0.02),
                       Text(
                         'Name',
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: width * 0.05,
                           fontWeight: FontWeight.w700,
                           color: AppColors.subtittlecolor,
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: height * 0.01),
                       Text(
                         'What should TSETSE call you?',
-                        style: TextStyle(color: AppColors.subtittlecolor),
+                        style: TextStyle(
+                          color: AppColors.subtittlecolor,
+                          fontSize: width * 0.03,
+                        ),
                         textAlign: TextAlign.center,
                       ),
-                      SizedBox(height: 10),
-
+                      SizedBox(height: height * 0.015),
                       ReusableTextField(
                         controller: nameController,
                         hintText: 'Name',
                         icon: Icons.person,
                       ),
-
-                      const SizedBox(height: 200),
+                      SizedBox(height: height * 0.25),
                       Reusablebutton(
                         text: 'Next',
                         backgroundColor: AppColors.Tsetsecolor,
@@ -137,6 +143,7 @@ class _NameScreenState extends State<NameScreen> {
                           );
                         },
                       ),
+                      SizedBox(height: height * 0.02),
                     ],
                   ),
                 ),

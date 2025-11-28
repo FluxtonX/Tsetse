@@ -8,10 +8,13 @@ class ProNext extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: width,
+        height: height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFFE3F6F5), Color(0xFFB3E5FC)],
@@ -19,94 +22,115 @@ class ProNext extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          children: [
-            SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  pro_container(),
-                  // Assets.icons.badge1.svg(height: 112, width: 32),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 40),
-                    child: Icon(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: height * 0.08),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    pro_container(),
+                    Icon(
                       Icons.close,
-                      size: 30,
+                      size: width * 0.08,
                       color: AppColors.Tsetsecolor,
                     ),
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 5),
-              child: Text(
-                'Save 15 minutes with powerful Pro Features',
-                style: TextStyle(
-                  fontSize: 34,
-                  color: AppColors.Tsetsecolor,
-                  fontWeight: FontWeight.bold,
+                  ],
                 ),
               ),
-            ),
-            Row(
-              children: [
-                SizedBox(width: 26),
-                Icon(
-                  Icons.check_outlined,
-                  color: AppColors.Tsetsecolor,
-                  size: 25,
-                ),
-                SizedBox(width: 4),
 
-                Text(
-                  '10M+ wake up data analyzed',
+              SizedBox(height: height * 0.03),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                child: Text(
+                  'Save 15 minutes with powerful Pro Features',
                   style: TextStyle(
-                    color: AppColors.subtittlecolor,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontSize: width * 0.075,
+                    color: AppColors.Tsetsecolor,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Image.asset('assets/images/Frame.png'),
-            SizedBox(height: 30),
+              ),
 
-            SizedBox(
-              width: 250,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF00C4CC),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+              SizedBox(height: height * 0.02),
+
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.check_outlined,
+                      color: AppColors.Tsetsecolor,
+                      size: width * 0.06,
+                    ),
+                    SizedBox(width: width * 0.015),
+                    Text(
+                      '10M+ wake up data analyzed',
+                      style: TextStyle(
+                        color: AppColors.subtittlecolor,
+                        fontSize: width * 0.045,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(height: height * 0.02),
+
+              Image.asset(
+                'assets/images/Frame.png',
+                width: width * 0.8,
+                height: height * 0.4,
+                fit: BoxFit.contain,
+              ),
+
+              SizedBox(height: height * 0.06),
+
+              SizedBox(
+                width: width * 0.65,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF00C4CC),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(width * 0.08),
+                    ),
+                    padding: EdgeInsets.symmetric(vertical: height * 0.02),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ProTsetse()),
-                  );
-                },
-                child: const Text(
-                  "Start my free week",
-                  style: TextStyle(color: Colors.white, fontSize: 17),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ProTsetse()),
+                    );
+                  },
+                  child: Text(
+                    "Start my free week",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: width * 0.045,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            SizedBox(height: 5),
-            Text(
-              'Not charge until trial ends',
-              style: TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.w400,
-                color: AppColors.subtittlecolor,
+
+              SizedBox(height: height * 0.01),
+
+              Text(
+                'Not charge until trial ends',
+                style: TextStyle(
+                  fontSize: width * 0.035,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.subtittlecolor,
+                ),
               ),
-            ),
-          ],
+
+              SizedBox(height: height * 0.03),
+            ],
+          ),
         ),
       ),
     );

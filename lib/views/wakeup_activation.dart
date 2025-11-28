@@ -35,10 +35,13 @@ class _WakeupActivationState extends State<WakeupActivation> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: width,
+        height: height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFFE3F6F5), Color(0xFFB3E5FC)],
@@ -48,7 +51,10 @@ class _WakeupActivationState extends State<WakeupActivation> {
         ),
         child: SafeArea(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+            padding: EdgeInsets.symmetric(
+              horizontal: width * 0.07,
+              vertical: height * 0.02,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,32 +62,38 @@ class _WakeupActivationState extends State<WakeupActivation> {
                   children: [
                     Expanded(
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: const LinearProgressIndicator(
+                        borderRadius: BorderRadius.circular(width * 0.02),
+                        child: LinearProgressIndicator(
                           value: 0.66,
                           backgroundColor: Colors.white,
-                          color: Color(0xFF00A8A8),
-                          minHeight: 6,
+                          color: const Color(0xFF00A8A8),
+                          minHeight: height * 0.008,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    const Text("2/3", style: TextStyle(color: Colors.black54)),
+                    SizedBox(width: width * 0.03),
+                    Text(
+                      "2/3",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: width * 0.04,
+                      ),
+                    ),
                   ],
                 ),
 
-                const SizedBox(height: 60),
+                SizedBox(height: height * 0.08),
 
-                const Text(
+                Text(
                   "Choose wake up mission",
                   style: TextStyle(
-                    fontSize: 34,
+                    fontSize: width * 0.08,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF007C7C),
+                    color: const Color(0xFF007C7C),
                   ),
                 ),
 
-                const SizedBox(height: 50),
+                SizedBox(height: height * 0.06),
 
                 MissionCard(
                   icon: Icons.face,
@@ -96,13 +108,13 @@ class _WakeupActivationState extends State<WakeupActivation> {
                     );
                   },
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: height * 0.02),
 
                 MissionCard(
                   icon: Icons.camera_alt_outlined,
                   title: "Photo",
                   subtitle: "Take a photo of a part of your morning routine",
-                  onTap: () => showPhotoBottomSheet(context),
+                  onTap: () => showPhotoBottomSheet(context, width, height),
                 ),
               ],
             ),
@@ -112,7 +124,7 @@ class _WakeupActivationState extends State<WakeupActivation> {
     );
   }
 
-  void showPhotoBottomSheet(BuildContext context) {
+  void showPhotoBottomSheet(BuildContext context, double width, double height) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -122,19 +134,22 @@ class _WakeupActivationState extends State<WakeupActivation> {
       ),
       builder: (context) {
         return Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+          padding: EdgeInsets.symmetric(
+            horizontal: width * 0.06,
+            vertical: height * 0.025,
+          ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                width: 60,
-                height: 5,
+                width: width * 0.15,
+                height: height * 0.007,
                 decoration: BoxDecoration(
                   color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(width * 0.03),
                 ),
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: height * 0.02),
 
               InkWell(
                 onTap: () async {
@@ -143,18 +158,18 @@ class _WakeupActivationState extends State<WakeupActivation> {
                   pickImage();
                 },
                 child: Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 6,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.04,
+                    vertical: height * 0.015,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(width * 0.1),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Photo",
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: width * 0.035,
                       fontWeight: FontWeight.w600,
                       color: Colors.black54,
                     ),
@@ -162,35 +177,34 @@ class _WakeupActivationState extends State<WakeupActivation> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: height * 0.02),
 
-              const Text(
+              Text(
                 'Show me your morning proof! instead of “Take a selfie to confirm.”',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 17,
+                  fontSize: width * 0.045,
                   fontWeight: FontWeight.w600,
-                  color: Color(0xFF004D4D),
+                  color: const Color(0xFF004D4D),
                   height: 1.4,
                 ),
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.03),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ExampleImage(
-                    innerPath: 'assets/icons/mug.jpg',
-                    imagePath: 'assets/icons/visible.png',
+                    innerPath: 'assets/images/mug.jpg',
+                    imagePath: 'assets/images/visible.png',
                     label: 'Clear visible',
                     icon: Icons.check,
                     iconColor: Colors.green,
                   ),
                   ExampleImage(
-                    innerPath: 'assets/icons/mug.jpg',
-
-                    imagePath: 'assets/icons/visible.png',
+                    innerPath: 'assets/images/mug.jpg',
+                    imagePath: 'assets/images/visible.png',
                     label: 'Not clear',
                     icon: Icons.close,
                     iconColor: Colors.red,
@@ -198,17 +212,17 @@ class _WakeupActivationState extends State<WakeupActivation> {
                 ],
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.03),
 
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color(0xFF00A8A8),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(width * 0.1),
                   ),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 100,
-                    vertical: 14,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.35,
+                    vertical: height * 0.018,
                   ),
                 ),
                 onPressed: () async {
@@ -216,13 +230,13 @@ class _WakeupActivationState extends State<WakeupActivation> {
                   await Future.delayed(const Duration(milliseconds: 300));
                   pickImage();
                 },
-                child: const Text(
+                child: Text(
                   "Photo",
-                  style: TextStyle(fontSize: 16, color: Colors.white),
+                  style: TextStyle(fontSize: width * 0.04, color: Colors.white),
                 ),
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.03),
             ],
           ),
         );
@@ -230,7 +244,10 @@ class _WakeupActivationState extends State<WakeupActivation> {
     );
   }
 
-  void  showCapturedImageSheet(BuildContext context) {
+  void showCapturedImageSheet(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -240,154 +257,157 @@ class _WakeupActivationState extends State<WakeupActivation> {
       ),
       builder: (_) {
         return SizedBox(
-          height: 700,
+          height: height * 0.85,
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 30),
+            padding: EdgeInsets.symmetric(
+              horizontal: width * 0.065,
+              vertical: height * 0.04,
+            ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 // Grey drag handle
                 Container(
-                  width: 50,
-                  height: 5,
+                  width: width * 0.12,
+                  height: height * 0.007,
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(width * 0.03),
                   ),
                 ),
 
-                const SizedBox(height: 15),
+                SizedBox(height: height * 0.02),
 
-                // "Photo" label
                 Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 18,
-                    vertical: 6,
+                  padding: EdgeInsets.symmetric(
+                    horizontal: width * 0.045,
+                    vertical: height * 0.015,
                   ),
                   decoration: BoxDecoration(
                     color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(20),
+                    borderRadius: BorderRadius.circular(width * 0.08),
                   ),
-                  child: const Text(
+                  child: Text(
                     "Photo",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    style: TextStyle(
+                      fontSize: width * 0.035,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: height * 0.025),
 
-                // Main text
-                const Text(
+                Text(
                   'Use that object again for picture to verify and stop Tsetse alarm',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: 24,
-                    height: 1.4,
+                    fontSize: width * 0.055,
                     fontWeight: FontWeight.bold,
-                    color: Color.fromRGBO(61, 90, 94, 1),
+                    color: const Color.fromRGBO(61, 90, 94, 1),
+                    height: 1.4,
                   ),
                 ),
 
-                const SizedBox(height: 25),
+                SizedBox(height: height * 0.03),
 
-                // Two images row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // "+" square
                     Container(
-                      width: 144,
-                      height: 144,
+                      width: width * 0.36,
+                      height: width * 0.36,
                       decoration: BoxDecoration(
                         color: const Color(0xFF305E5B),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(width * 0.03),
                       ),
                       child: const Center(
                         child: Icon(Icons.add, color: Colors.white, size: 40),
                       ),
                     ),
-
-                    const SizedBox(width: 20),
-
-                    // Captured image + green check
-                    Stack(
-                      children: [
-                        Container(
-                          width: 144,
-                          height: 144,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            image: DecorationImage(
-                              image: FileImage(_capturedImage!),
-                              fit: BoxFit.cover,
+                    SizedBox(width: width * 0.04),
+                    if (_capturedImage != null)
+                      Stack(
+                        children: [
+                          Container(
+                            width: width * 0.36,
+                            height: width * 0.36,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(width * 0.03),
+                              image: DecorationImage(
+                                image: FileImage(_capturedImage!),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Positioned(
-                          child: Container(
-                            padding: const EdgeInsets.all(3),
-                            decoration: const BoxDecoration(
-                              color: Colors.green,
-                              shape: BoxShape.circle,
-                            ),
-                            child: const Icon(
-                              Icons.check,
-                              color: Colors.white,
-                              size: 18,
+                          Positioned(
+                            child: Container(
+                              padding: EdgeInsets.all(width * 0.015),
+                              decoration: const BoxDecoration(
+                                color: Colors.green,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.check,
+                                color: Colors.white,
+                                size: 18,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
+                        ],
+                      ),
                   ],
                 ),
 
-                const SizedBox(height: 200),
+                SizedBox(height: height * 0.12),
 
-                // Buttons row
                 Row(
                   children: [
-                    // Preview button
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black87,
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(width * 0.08),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: EdgeInsets.symmetric(
+                            vertical: height * 0.018,
+                          ),
                         ),
-                        onPressed: () {
-                          // add preview logic (optional)
-                        },
-                        child: const Text("Preview"),
+                        onPressed: () {},
+                        child: Text(
+                          "Preview",
+                          style: TextStyle(fontSize: width * 0.045),
+                        ),
                       ),
                     ),
-
-                    const SizedBox(width: 15),
-
-                    // Complete button
+                    SizedBox(width: width * 0.03),
                     Expanded(
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF23CEA6),
+                          backgroundColor: const Color(0xFF23CEA6),
                           foregroundColor: Colors.white,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(width * 0.08),
                           ),
-                          padding: const EdgeInsets.symmetric(vertical: 14),
+                          padding: EdgeInsets.symmetric(
+                            vertical: height * 0.018,
+                          ),
                         ),
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: const Text("Complete"),
+                        child: Text(
+                          "Complete",
+                          style: TextStyle(fontSize: width * 0.045),
+                        ),
                       ),
                     ),
                   ],
                 ),
 
-                const SizedBox(height: 20),
+                SizedBox(height: height * 0.025),
               ],
             ),
           ),

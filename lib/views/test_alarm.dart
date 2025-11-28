@@ -9,10 +9,13 @@ class TestAlarmScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [AppColors.lightskyblue, AppColors.skyblue],
@@ -20,95 +23,131 @@ class TestAlarmScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 60),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: height * 0.08),
 
-            const Text(
-              'October 31 Fri',
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.Tsetsecolor,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-
-            // Time
-            RichText(
-              text: const TextSpan(
-                children: [
-                  TextSpan(
-                    text: '06:30',
-                    style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFF00BCD4),
-                      letterSpacing: 2,
-                    ),
-                  ),
-                  TextSpan(
-                    text: 'AM',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xFF00BCD4),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            const SizedBox(height: 25),
-
-            // SvgIcon('assets/icons/mainicon.svg'),
-            Image.asset('assets/images/icons1.png', height: 188, width: 188),
-
-            const SizedBox(height: 30),
-
-            // Message text
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                'Still sleeping? Your future self will\nthank you for getting up now ',
-                textAlign: TextAlign.center,
+              // Date
+              Text(
+                'October 31 Fri',
                 style: TextStyle(
-                  fontSize: 18,
-                  color: AppColors.subtittlecolor,
-                  fontWeight: FontWeight.bold,
+                  fontSize: width * 0.035,
+                  color: AppColors.Tsetsecolor,
+                  fontWeight: FontWeight.w500,
                 ),
               ),
-            ),
 
-            const SizedBox(height: 20),
+              SizedBox(height: height * 0.03),
 
-            // Snooze button
-            GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => Snooze1Screen()),
-                );
-              },
-              child: snoozebutton(text: 'snooze 3'),
-            ),
-            SizedBox(height: 20),
+              // Time
+              RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(
+                      text: '06:30',
+                      style: TextStyle(
+                        fontSize: width * 0.12,
+                        fontWeight: FontWeight.w300,
+                        color: const Color(0xFF00BCD4),
+                        letterSpacing: 2,
+                      ),
+                    ),
+                    TextSpan(
+                      text: 'AM',
+                      style: TextStyle(
+                        fontSize: width * 0.05,
+                        fontWeight: FontWeight.w400,
+                        color: const Color(0xFF00BCD4),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
 
-            GestureDetector(onTap: () {}, child: Startmission()),
+              SizedBox(height: height * 0.03),
 
-            const SizedBox(height: 15),
+              // Image
+              Image.asset(
+                'assets/images/icons1.png',
+                height: height * 0.25,
+                width: height * 0.25,
+              ),
 
-            // Small text
-            const Text(
-              'The alarm won\'t stop until you start your mission',
-              style: TextStyle(fontSize: 14, color: AppColors.subtittlecolor),
-            ),
+              SizedBox(height: height * 0.03),
 
-            const SizedBox(height: 70),
+              // Message text
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+                child: Text(
+                  'Still sleeping? Your future self will\nthank you for getting up now ',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: width * 0.045,
+                    color: AppColors.subtittlecolor,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
 
-            // Extra Preview button
-            extrapreview(),
-          ],
+              SizedBox(height: height * 0.025),
+
+              // Snooze button
+              GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Snooze1Screen(),
+                    ),
+                  );
+                },
+                child: SizedBox(
+                  width: width * 0.5,
+                  height: height * 0.06,
+                  child: snoozebutton(text: 'snooze 3'),
+                ),
+              ),
+
+              SizedBox(height: height * 0.025),
+
+              GestureDetector(
+                onTap: () {},
+                child: SizedBox(
+                  width: width * 0.6,
+                  height: height * 0.06,
+                  child: Startmission(),
+                ),
+              ),
+
+              SizedBox(height: height * 0.015),
+
+              // Small text
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.06),
+                child: Text(
+                  'The alarm won\'t stop until you start your mission',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: width * 0.035,
+                    color: AppColors.subtittlecolor,
+                  ),
+                ),
+              ),
+
+              SizedBox(height: height * 0.08),
+
+              // Extra Preview button
+              SizedBox(
+                width: width,
+                height: height * 0.06,
+                child: extrapreview(),
+              ),
+
+              SizedBox(height: height * 0.03),
+            ],
+          ),
         ),
       ),
     );

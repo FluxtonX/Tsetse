@@ -1,8 +1,13 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tsetse/firebase_options.dart';
+import 'package:tsetse/views/Pro_next.dart';
+import 'package:tsetse/views/Pro_tsetse.dart';
 import 'package:tsetse/views/alerttime_screen.dart';
 import 'package:tsetse/views/authentication/auth_wrapper.dart';
+import 'package:tsetse/views/authentication/name_screen.dart';
+import 'package:tsetse/views/lasr_snooze.dart';
+import 'package:tsetse/views/pp.dart';
 import 'package:tsetse/views/pro_screen.dart';
 import 'package:tsetse/views/test_alarm.dart';
 
@@ -23,7 +28,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
       debugShowCheckedModeBanner: false,
-      home: const ProScreen(),
+      home: NameScreen(),
     );
   }
 }

@@ -17,9 +17,13 @@ class _AlarmTimeScreenState extends State<AlarmTimeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [AppColors.lightskyblue, AppColors.skyblue],
@@ -30,11 +34,11 @@ class _AlarmTimeScreenState extends State<AlarmTimeScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.04),
 
               // Top progress bar (step indicator)
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 32),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.08),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -44,32 +48,38 @@ class _AlarmTimeScreenState extends State<AlarmTimeScreen> {
                         value: 0.33, // 1/3 progress
                         backgroundColor: Colors.white,
                         color: AppColors.Tsetsecolor,
-                        minHeight: 6,
+                        minHeight: height * 0.008,
                       ),
                     ),
-                    const SizedBox(width: 12),
-                    const Text('1/3', style: TextStyle(color: Colors.black54)),
+                    SizedBox(width: width * 0.03),
+                    Text(
+                      '1/3',
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: width * 0.04,
+                      ),
+                    ),
                   ],
                 ),
               ),
 
-              const SizedBox(height: 80),
+              SizedBox(height: height * 0.1),
 
               // Title
               Text(
                 'Set your alarm time',
                 style: TextStyle(
-                  fontSize: 26,
+                  fontSize: width * 0.07,
                   fontWeight: FontWeight.bold,
                   color: AppColors.Tsetsecolor,
                 ),
               ),
 
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.15),
 
               // Time picker
               SizedBox(
-                height: 200,
+                height: height * 0.13,
                 child: CupertinoTheme(
                   data: const CupertinoThemeData(brightness: Brightness.light),
                   child: CupertinoDatePicker(
@@ -85,12 +95,11 @@ class _AlarmTimeScreenState extends State<AlarmTimeScreen> {
                 ),
               ),
 
-              SizedBox(height: 100),
+              SizedBox(height: height * 0.30),
+
+              // Next button
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 40,
-                  vertical: 40,
-                ),
+                padding: EdgeInsets.symmetric(horizontal: width * 0.1),
                 child: Reusablebutton(
                   text: "Next",
                   backgroundColor: AppColors.Tsetsecolor,

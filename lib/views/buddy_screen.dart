@@ -11,10 +11,13 @@ class BuddyScreen extends StatefulWidget {
 class _BuddyScreenState extends State<BuddyScreen> {
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: width,
+        height: height,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFFE3F6F5), Color(0xFFB3E5FC)],
@@ -28,91 +31,105 @@ class _BuddyScreenState extends State<BuddyScreen> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 26,
-                  vertical: 26,
+                padding: EdgeInsets.symmetric(
+                  horizontal: width * 0.07,
+                  vertical: height * 0.03,
                 ),
                 child: Row(
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        padding: EdgeInsets.symmetric(horizontal: width * 0.05),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(8),
-                          child: const LinearProgressIndicator(
+                          borderRadius: BorderRadius.circular(width * 0.02),
+                          child: LinearProgressIndicator(
                             value: 1,
                             backgroundColor: Colors.white,
-                            color: Color(0xFF00A8A8),
-                            minHeight: 6,
+                            color: const Color(0xFF00A8A8),
+                            minHeight: height * 0.008,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(width: 5),
-                    const Text("3/3", style: TextStyle(color: Colors.black54)),
+                    SizedBox(width: width * 0.015),
+                    Text(
+                      "3/3",
+                      style: TextStyle(
+                        color: Colors.black54,
+                        fontSize: width * 0.04,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              const SizedBox(height: 60),
+              SizedBox(height: height * 0.08),
 
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: const Text(
+                padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+                child: Text(
                   "Choose your Buzz Buddy",
                   style: TextStyle(
-                    fontSize: 34,
+                    fontSize: width * 0.08,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF007C7C),
+                    color: const Color(0xFF007C7C),
                   ),
                 ),
               ),
-              SizedBox(height: 100),
+              SizedBox(height: height * 0.1),
+
               Expanded(
                 child: Container(
-                  width: double.infinity,
-                  decoration: const BoxDecoration(
+                  width: width,
+                  decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(55),
-                      topRight: Radius.circular(55),
+                      topLeft: Radius.circular(width * 0.14),
+                      topRight: Radius.circular(width * 0.14),
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 20,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: width * 0.05,
+                      vertical: height * 0.03,
                     ),
                     child: Column(
                       children: [
-                        const Text(
+                        Text(
                           'Buzz Buddy',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: width * 0.06,
                             fontWeight: FontWeight.w600,
-                            color: Color(0xFF004D4D),
+                            color: const Color(0xFF004D4D),
                             height: 1.4,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: EdgeInsets.all(width * 0.025),
                           child: Text(
-                            'Let the user add or invite a friend, roommate, or  classmate who will get a “wake-up alert” if the \n    user fails to wake up after 3 snoozes.',
-                            style: TextStyle(fontWeight: FontWeight.w400),
+                            'Let the user add or invite a friend, roommate, or classmate who will get a “wake-up alert” if the user fails to wake up after 3 snoozes.',
+                            style: TextStyle(
+                              fontWeight: FontWeight.w400,
+                              fontSize: width * 0.037,
+                              height: 1.4,
+                            ),
                           ),
                         ),
 
-                        const SizedBox(height: 30),
+                        SizedBox(height: height * 0.03),
                         BuzzBuddyCard(onTap: () {}),
-                        SizedBox(height: 45),
+                        SizedBox(height: height * 0.08),
+
                         SizedBox(
-                          width: 220,
-                          height: 50,
+                          width: width * 0.55,
+                          height: height * 0.065,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF00C4CC),
+                              backgroundColor: const Color(0xFF00C4CC),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(
+                                  width * 0.08,
+                                ),
                               ),
                             ),
                             onPressed: () {
@@ -123,16 +140,16 @@ class _BuddyScreenState extends State<BuddyScreen> {
                                 ),
                               );
                             },
-                            child: const Text(
+                            child: Text(
                               "Invite Friend",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: width * 0.045,
                                 color: Colors.white,
                               ),
                             ),
                           ),
                         ),
-                        SizedBox(height: 25),
+                        SizedBox(height: height * 0.03),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
@@ -142,7 +159,10 @@ class _BuddyScreenState extends State<BuddyScreen> {
                               ),
                             );
                           },
-                          child: Text('Skip for now'),
+                          child: Text(
+                            'Skip for now',
+                            style: TextStyle(fontSize: width * 0.04),
+                          ),
                         ),
                       ],
                     ),
@@ -164,30 +184,32 @@ class BuzzBuddyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(width * 0.04),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: BorderRadius.circular(width * 0.04),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 4),
+              blurRadius: width * 0.025,
+              offset: Offset(0, height * 0.005),
             ),
           ],
         ),
         child: Row(
           children: [
-            // Left Icon inside circle
             Container(
-              width: 47,
-              height: 48,
+              width: width * 0.11,
+              height: width * 0.11,
               decoration: BoxDecoration(
                 color: const Color(0xFFE0F7FA),
-                borderRadius: BorderRadius.circular(12),
+                borderRadius: BorderRadius.circular(width * 0.03),
               ),
               child: const Icon(
                 Icons.person_add_alt_1,
@@ -195,25 +217,25 @@ class BuzzBuddyCard extends StatelessWidget {
                 size: 26,
               ),
             ),
-
-            const SizedBox(width: 14),
-
-            // Text Section
+            SizedBox(width: width * 0.035),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   "Buzz Buddy",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: width * 0.04,
                     fontWeight: FontWeight.w600,
                     color: Colors.black87,
                   ),
                 ),
-                SizedBox(height: 4),
+                SizedBox(height: height * 0.005),
                 Text(
                   "If you fail to wake-up, your chosen friend gets notified",
-                  style: TextStyle(fontSize: 10, color: Colors.black54),
+                  style: TextStyle(
+                    fontSize: width * 0.022,
+                    color: Colors.black54,
+                  ),
                 ),
               ],
             ),

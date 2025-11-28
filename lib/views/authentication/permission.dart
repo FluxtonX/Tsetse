@@ -16,11 +16,8 @@ class PermissionScreen extends StatefulWidget {
 
 class _PermissionScreenState extends State<PermissionScreen> {
   bool cameraGranted = false;
-
   bool notificationGranted = false;
-
   bool locationGranted = false;
-
   bool contactsGranted = false;
 
   Future<void> requestcameraPermission() async {
@@ -46,15 +43,12 @@ class _PermissionScreenState extends State<PermissionScreen> {
 
   Future<void> contactsPermission() async {
     final status = await Permission.contacts.request();
-
     if (status.isDenied) {
       await Permission.contacts.request();
     }
-
     if (status.isPermanentlyDenied) {
       openAppSettings();
     }
-
     setState(() {
       contactsGranted = status.isGranted;
     });
@@ -76,10 +70,13 @@ class _PermissionScreenState extends State<PermissionScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
+        width: width,
+        height: height,
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [AppColors.lightskyblue, AppColors.skyblue],
@@ -88,189 +85,187 @@ class _PermissionScreenState extends State<PermissionScreen> {
           ),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(height: 50),
-            Row(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Text(
-                      'Permissions \nSetup',
-                      style: TextStyle(
-                        fontSize: 34,
-                        color: AppColors.Tsetsecolor,
-                        fontWeight: FontWeight.bold,
-                      ),
+            SizedBox(height: height * 0.05),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: width * 0.05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Permissions \nSetup',
+                    style: TextStyle(
+                      fontSize: width * 0.08,
+                      color: AppColors.Tsetsecolor,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    signOutUser();
-                  },
-                  child: Text('Log out'),
-                ),
-              ],
-            ),
-
-            SizedBox(height: 20),
-
-            Container(
-              height: 74,
-              width: 74,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  Image.asset(
-                    'assets/images/fly2.png',
-                    width: 100,
-                    height: 100,
+                  GestureDetector(
+                    onTap: () {
+                      signOutUser();
+                    },
+                    child: Text(
+                      'Log out',
+                      style: TextStyle(
+                        fontSize: width * 0.04,
+                        color: AppColors.Tsetsecolor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(height: 5),
-            const Text(
+            SizedBox(height: height * 0.02),
+            Container(
+              height: height * 0.1,
+              width: width * 0.18,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(width * 0.04),
+              ),
+              child: Center(
+                child: Image.asset(
+                  'assets/images/fly2.png',
+                  width: width * 0.12,
+                  height: width * 0.12,
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            SizedBox(height: height * 0.01),
+            Text(
               "TSETSE",
               style: TextStyle(
                 color: AppColors.Tsetsecolor,
-                fontSize: 34,
+                fontSize: width * 0.08,
                 fontWeight: FontWeight.w700,
               ),
             ),
-            const SizedBox(height: 10),
-            // Spacer(),
+            SizedBox(height: height * 0.015),
             Expanded(
-              flex: 1,
               child: Container(
-                width: double.infinity,
+                width: width,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(60),
-                    topRight: Radius.circular(60),
+                    topLeft: Radius.circular(width * 0.15),
+                    topRight: Radius.circular(width * 0.15),
                   ),
                 ),
                 child: SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(height: 20),
-                      Text(
-                        'Permission',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          color: AppColors.subtittlecolor,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+                    child: Column(
+                      children: [
+                        SizedBox(height: height * 0.03),
+                        Text(
+                          'Permission',
+                          style: TextStyle(
+                            fontSize: width * 0.06,
+                            fontWeight: FontWeight.w700,
+                            color: AppColors.subtittlecolor,
+                          ),
                         ),
-                      ),
-                      Text(
-                        'We need these to help you wake up',
-                        style: TextStyle(color: AppColors.subtittlecolor),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 10),
-                      buildPermissionTile(
-                        icon: Icons.camera_alt,
-                        title: "Camera",
-                        subtitle: "To verify your wake up selfies",
-                        value: cameraGranted,
-                        color: AppColors.Tsetsecolor,
-                        onTap: () {
-                          requestcameraPermission();
-                        },
-                      ),
-                      SizedBox(height: 10),
+                        SizedBox(height: height * 0.01),
+                        Text(
+                          'We need these to help you wake up',
+                          style: TextStyle(
+                            fontSize: width * 0.04,
+                            color: AppColors.subtittlecolor,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        SizedBox(height: height * 0.02),
+                        buildPermissionTile(
+                          icon: Icons.camera_alt,
+                          title: "Camera",
+                          subtitle: "To verify your wake up selfies",
+                          value: cameraGranted,
+                          color: AppColors.Tsetsecolor,
+                          onTap: requestcameraPermission,
+                          context: context,
+                        ),
+                        SizedBox(height: height * 0.015),
+                        buildPermissionTile(
+                          icon: Icons.notifications_none,
+                          title: "Notification",
+                          subtitle: "For pre alarm reminders",
+                          value: notificationGranted,
+                          color: AppColors.Tsetsecolor,
+                          onTap: notificationRequest,
+                          context: context,
+                        ),
+                        SizedBox(height: height * 0.015),
+                        buildPermissionTile(
+                          icon: Icons.location_on_outlined,
+                          title: "Location",
+                          subtitle: "To alert your Buzz buddy if you oversleep",
+                          value: locationGranted,
+                          color: AppColors.Tsetsecolor,
+                          onTap: locationPermission,
+                          context: context,
+                        ),
+                        SizedBox(height: height * 0.015),
+                        buildPermissionTile(
+                          icon: Icons.phone,
+                          title: "Contacts",
+                          subtitle: "To connect your Buzz buddy",
+                          value: contactsGranted,
+                          color: AppColors.Tsetsecolor,
+                          onTap: contactsPermission,
+                          context: context,
+                        ),
+                        SizedBox(height: height * 0.04),
+                        Reusablebutton(
+                          text: 'Allow All & Continue',
+                          backgroundColor: AppColors.Tsetsecolor,
+                          onTap: () async {
+                            await allowAllPermissions();
 
-                      buildPermissionTile(
-                        icon: Icons.notifications_none,
-                        title: "Notification",
-                        subtitle: "For pre alarm reminders",
-                        value: notificationGranted,
-                        color: AppColors.Tsetsecolor,
-                        onTap: () {
-                          notificationRequest();
-                        },
-                      ),
-                      SizedBox(height: 10),
-
-                      buildPermissionTile(
-                        icon: Icons.location_on_outlined,
-                        title: "Location",
-                        subtitle: "To alert your Buzz buddy if you oversleep",
-                        value: locationGranted,
-                        color: AppColors.Tsetsecolor,
-                        onTap: () {
-                          locationPermission();
-                        },
-                      ),
-                      SizedBox(height: 10),
-
-                      buildPermissionTile(
-                        icon: Icons.phone,
-                        title: "Contacts",
-                        subtitle: "To connect your Buzz buddy",
-                        value: contactsGranted,
-                        color: AppColors.Tsetsecolor,
-                        onTap: () {
-                          contactsPermission();
-                        },
-                      ),
-                      SizedBox(height: 40),
-
-                      Reusablebutton(
-                        text: 'Allow All&continue',
-                        backgroundColor: AppColors.Tsetsecolor,
-                        onTap: () async {
-                          await allowAllPermissions();
-
-                          if (cameraGranted &&
-                              notificationGranted &&
-                              locationGranted &&
-                              contactsGranted) {
-                            Navigator.pushReplacement(
+                            if (cameraGranted &&
+                                notificationGranted &&
+                                locationGranted &&
+                                contactsGranted) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AlarmTimeScreen(),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    "Please allow all permissions to continue.",
+                                  ),
+                                ),
+                              );
+                            }
+                          },
+                        ),
+                        SizedBox(height: height * 0.015),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const AlarmTimeScreen(),
                               ),
                             );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  "Please allow all permissions to continue.",
-                                ),
-                              ),
-                            );
-                          }
-                        },
-                      ),
-                      SizedBox(height: 10),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => AlarmTimeScreen(),
+                          },
+                          child: Text(
+                            'Skip for now',
+                            style: TextStyle(
+                              fontSize: width * 0.045,
+                              color: AppColors.Tsetsecolor,
+                              fontWeight: FontWeight.w600,
                             ),
-                          );
-                        },
-                        child: Text(
-                          'Skip for now',
-                          style: TextStyle(
-                            color: AppColors.Tsetsecolor,
-                            fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ),
-                    ],
+                        SizedBox(height: height * 0.03),
+                      ],
+                    ),
                   ),
                 ),
               ),
