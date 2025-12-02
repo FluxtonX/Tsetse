@@ -11,7 +11,6 @@ class UserModel {
     required this.createdAt,
   });
 
-  // Convert UserModel → Map (for Firestore)
   Map<String, dynamic> toMap() {
     return {
       "uid": uid,
@@ -21,13 +20,12 @@ class UserModel {
     };
   }
 
-  // Convert Map → UserModel
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
       uid: map["uid"] ?? "",
       name: map["name"] ?? "",
       email: map["email"] ?? "",
-      createdAt: DateTime.parse(map["createdAt"]),
+      createdAt: DateTime.tryParse(map["createdAt"] ?? "") ?? DateTime.now(),
     );
   }
 }

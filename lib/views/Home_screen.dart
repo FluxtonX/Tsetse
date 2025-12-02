@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tsetse/Providers/bottmonav_provider.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/core/utils/svg_icon.dart';
-import 'package:tsetse/views/Pro_tsetse.dart';
-import 'package:tsetse/views/addalaram_screen.dart';
-import 'package:tsetse/views/pro_screen.dart';
-import 'package:tsetse/views/snooze1_screen.dart';
-import 'package:tsetse/views/test_alarm.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'package:tsetse/views/addalaram_screen.dart';
+import 'package:tsetse/views/mugshot_gallery.dart';
+import 'package:tsetse/views/rewards.dart';
+import 'package:tsetse/views/settings_screen.dart';
+import 'package:tsetse/views/staeScreen.dart';
+import 'package:tsetse/views/test_alarm.dart';
+import 'package:tsetse/views/pro_screen.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedIndex = 0;
+
+  // Screens
+  final List<Widget> screens = [
+    HomeMainContent(), // Main Home Content
+    MugshotGalleryScreen(),
+    Rewards(),
+    StateReportScreen(),
+    SettingsScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +39,86 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
 
+      bottomNavigationBar: Consumer<BottomNavProvider>(
+        builder: (BuildContext context, provider, Widget? child) {
+          return Padding(
+            padding: EdgeInsets.only(bottom: height * 0.03),
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: width * 0.05),
+              height: height * 0.08,
+              decoration: BoxDecoration(
+                color: AppColors.Tsetsecolor,
+                borderRadius: BorderRadius.circular(width * 0.1),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  BottomIcon(
+                    icon: Icons.alarm,
+                    label: "Alarm",
+                    width: width,
+                    index: 0,
+                    selectedIndex: provider.selectedIndex,
+                    onTap: () => provider.changeIndex(0),
+                  ),
+                  BottomIcon(
+                    icon: Icons.camera_alt_outlined,
+                    label: "Gallery",
+                    width: width,
+                    index: 1,
+                    selectedIndex: provider.selectedIndex,
+                    onTap: () => provider.changeIndex(1),
+                  ),
+
+                  BottomIcon(
+                    icon: Icons.workspace_premium,
+                    label: "Rewards",
+                    width: width,
+                    index: 2,
+                    selectedIndex: provider.selectedIndex,
+                    onTap: () => provider.changeIndex(2),
+                  ),
+                  BottomIcon(
+                    icon: Icons.library_books_rounded,
+                    label: "State",
+                    width: width,
+                    index: 3,
+                    selectedIndex: provider.selectedIndex,
+                    onTap: () => provider.changeIndex(3),
+                  ),
+                  BottomIcon(
+                    icon: Icons.settings_suggest_outlined,
+                    label: "Setting",
+                    width: width,
+                    index: 4,
+                    selectedIndex: provider.selectedIndex,
+                    onTap: () => provider.changeIndex(4),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+
+      body: Consumer<BottomNavProvider>(
+        builder: (BuildContext context, providr, Widget? child) {
+          return screens[providr.selectedIndex];
+        },
+      ),
+    );
+  }
+}
+
+class HomeMainContent extends StatelessWidget {
+  const HomeMainContent({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    final height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: height * 0.03),
         child: Container(
@@ -39,28 +140,6 @@ class HomeScreen extends StatelessWidget {
       ),
 
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.only(bottom: height * 0.03),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: width * 0.05),
-          height: height * 0.08,
-          decoration: BoxDecoration(
-            color: AppColors.Tsetsecolor,
-            borderRadius: BorderRadius.circular(width * 0.1),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              BottomIcon(icon: Icons.alarm, label: "Alarm", width: width),
-              BottomIcon(icon: Icons.photo, label: "Gallery", width: width),
-              BottomIcon(icon: Icons.group, label: "Buzz Buddy", width: width),
-              BottomIcon(icon: Icons.settings, label: "Setting", width: width),
-            ],
-          ),
-        ),
-      ),
-
       body: Container(
         height: height,
         width: width,
@@ -78,12 +157,6 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.symmetric(
                 horizontal: width * 0.06,
                 vertical: height * 0.05,
-              ),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(40),
-                  bottomRight: Radius.circular(40),
-                ),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +203,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ],
                   ),
+
                   SizedBox(height: height * 0.01),
+
                   Text(
                     "The Alarm That Won’t Let You Sleep",
                     style: TextStyle(
@@ -173,19 +248,12 @@ class HomeScreen extends StatelessWidget {
                                 vertical: height * 0.01,
                               ),
                               decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xFF00A8A8),
-                                    blurRadius: width * 0.03,
-                                    offset: Offset(0, height * 0.01),
-                                  ),
-                                ],
                                 color: const Color(0xFFE0F7FA),
-                                borderRadius: BorderRadius.circular(
-                                  width * 0.05,
-                                ),
                                 border: Border.all(
                                   color: AppColors.Tsetsecolor,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                  width * 0.05,
                                 ),
                               ),
                               child: Row(
@@ -207,7 +275,9 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+
                           const Spacer(),
+
                           Text(
                             "15",
                             style: TextStyle(
@@ -224,6 +294,7 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     AlarmCard(width: width, height: height),
                   ],
                 ),
@@ -250,16 +321,16 @@ class AlarmCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(width * 0.07),
+        border: const Border(
+          bottom: BorderSide(color: Color(0xFF00C4CC), width: 2),
+        ),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.08),
             blurRadius: width * 0.03,
-            offset: Offset(0, height * 0.01),
+            offset: Offset(0, 4),
           ),
         ],
-        border: Border(
-          bottom: BorderSide(color: const Color(0xFF00C4CC), width: 2),
-        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -284,7 +355,9 @@ class AlarmCard extends StatelessWidget {
               ),
             ],
           ),
+
           SizedBox(height: height * 0.018),
+
           Text(
             "S  M  T  W  T  S",
             style: TextStyle(
@@ -293,7 +366,9 @@ class AlarmCard extends StatelessWidget {
               color: Colors.black87,
             ),
           ),
+
           SizedBox(height: height * 0.012),
+
           Row(
             children: [
               Text(
@@ -309,6 +384,7 @@ class AlarmCard extends StatelessWidget {
               Icon(Icons.more_vert, size: width * 0.06),
             ],
           ),
+
           Container(
             height: height * 0.03,
             width: width * 0.15,
@@ -338,25 +414,52 @@ class BottomIcon extends StatelessWidget {
   final String label;
   final double width;
 
+  final int index;
+  final int selectedIndex;
+  final VoidCallback onTap;
+  final AssetImage? image;
+
   const BottomIcon({
     super.key,
     required this.icon,
     required this.label,
     required this.width,
+    required this.index,
+    required this.selectedIndex,
+    required this.onTap,
+    this.image,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: Colors.white, size: width * 0.05),
-        SizedBox(height: width * 0.01),
-        Text(
-          label,
-          style: TextStyle(color: Colors.white, fontSize: width * 0.03),
+    bool isSelected = selectedIndex == index;
+
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        enableFeedback: true,
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (image != null) Image(image: image!),
+            Icon(
+              icon,
+              color: isSelected ? Colors.white : Colors.black,
+              size: isSelected ? width * 0.07 : width * 0.05,
+            ),
+            SizedBox(height: width * 0.01),
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black,
+                fontSize: isSelected ? width * 0.035 : width * 0.03,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+              ),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }

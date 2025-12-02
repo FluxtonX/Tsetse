@@ -11,7 +11,39 @@ class AddAlarmScreen extends StatefulWidget {
 }
 
 class _AddAlarmScreenState extends State<AddAlarmScreen> {
+  String alarmLabel = "Morning class, gym, etc..";
+  final TextEditingController _controller = TextEditingController();
   DateTime selectedTime = DateTime.now();
+  void _editLabel() {
+    _controller.text = alarmLabel;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text("Edit Alarm Label"),
+        content: TextField(
+          controller: _controller,
+          decoration: const InputDecoration(hintText: "Enter label"),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Cancel"),
+          ),
+          ElevatedButton(
+            onPressed: () {
+              setState(() {
+                alarmLabel = _controller.text;
+              });
+              Navigator.pop(context);
+            },
+            child: const Text("Save"),
+          ),
+        ],
+      ),
+    );
+  }
 
   bool snooze = false;
   bool buzz = false;
@@ -57,49 +89,55 @@ class _AddAlarmScreenState extends State<AddAlarmScreen> {
             const SizedBox(height: 10),
 
             // Gradient Top Section
-            Container(
-              height: 93,
-              width: 345,
-              padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(21),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
-                      Text(
-                        "Alarm Lable",
-                        style: TextStyle(fontSize: 15, color: Colors.black54),
-                      ),
-                      SizedBox(height: 6),
-                      Row(
-                        children: [
-                          Icon(Icons.wb_sunny, color: Colors.amber),
-                          SizedBox(width: 6),
-                          Text(
-                            "Morning class, gym, etc..",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black87,
+            InkWell(
+              onTap: _editLabel,
+              child: Container(
+                height: 93,
+                width: 345,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 18,
+                  vertical: 18,
+                ),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(21),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 8,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Alarm Lable",
+                          style: TextStyle(fontSize: 15, color: Colors.black54),
+                        ),
+                        SizedBox(height: 6),
+                        Row(
+                          children: [
+                            Icon(Icons.wb_sunny, color: Colors.amber),
+                            SizedBox(width: 6),
+                            Text(
+                              "Morning class, gym, etc..",
+                              style: TextStyle(
+                                fontSize: 14,
+                                color: Colors.black87,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const Icon(Icons.edit, size: 18),
-                ],
+                          ],
+                        ),
+                      ],
+                    ),
+                    const Icon(Icons.edit, size: 18),
+                  ],
+                ),
               ),
             ),
 

@@ -33,10 +33,15 @@ class ProNext extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     pro_container(),
-                    Icon(
-                      Icons.close,
-                      size: width * 0.08,
-                      color: AppColors.Tsetsecolor,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        size: width * 0.08,
+                        color: AppColors.Tsetsecolor,
+                      ),
                     ),
                   ],
                 ),

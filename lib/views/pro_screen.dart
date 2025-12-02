@@ -39,10 +39,15 @@ class _ProScreenState extends State<ProScreen> {
                   children: [
                     pro_container(),
 
-                    Icon(
-                      Icons.close,
-                      size: width * 0.08,
-                      color: AppColors.Tsetsecolor,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        size: width * 0.08,
+                        color: AppColors.Tsetsecolor,
+                      ),
                     ),
                   ],
                 ),

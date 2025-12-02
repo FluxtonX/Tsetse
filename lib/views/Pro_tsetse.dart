@@ -5,7 +5,7 @@ import 'package:tsetse/core/utils/app_colors.dart';
 import 'package:tsetse/core/utils/svg_icon.dart';
 
 class ProTsetse extends StatefulWidget {
-  ProTsetse({super.key});
+  const ProTsetse({super.key});
 
   @override
   State<ProTsetse> createState() => _ProTsetseState();
@@ -41,10 +41,15 @@ class _ProTsetseState extends State<ProTsetse> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     pro_container(),
-                    Icon(
-                      Icons.close,
-                      size: width * 0.08,
-                      color: AppColors.Tsetsecolor,
+                    InkWell(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: Icon(
+                        Icons.close,
+                        size: width * 0.08,
+                        color: AppColors.Tsetsecolor,
+                      ),
                     ),
                   ],
                 ),
@@ -119,10 +124,10 @@ class _ProTsetseState extends State<ProTsetse> {
                     padding: EdgeInsets.symmetric(vertical: height * 0.02),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ProTsetse()),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => ProTsetse()),
+                    // );
                   },
                   child: Text(
                     "Start my free week",

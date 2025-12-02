@@ -81,28 +81,34 @@ class SplashScreen extends StatelessWidget {
 
                 Padding(
                   padding: EdgeInsets.only(top: max(height * 0.09, 40)),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const AuthScreen(),
+                  child: Material(
+                    borderRadius: BorderRadius.circular(max(width * 0.05, 18)),
+                    color: AppColors.Tsetsecolor,
+                    child: InkWell(
+                      enableFeedback: true,
+
+                      onTap: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AuthScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: max(width * 0.25, 80),
+                        height: max(height * 0.06, 35),
+                        decoration: BoxDecoration(
+                          color: AppColors.Tsetsecolor,
+                          borderRadius: BorderRadius.circular(
+                            max(width * 0.05, 18),
+                          ),
                         ),
-                      );
-                    },
-                    child: Container(
-                      width: max(width * 0.25, 80),
-                      height: max(height * 0.06, 35),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(
-                          max(width * 0.05, 18),
+                        child: Icon(
+                          Icons.arrow_forward,
+                          size: max(width * 0.09, 28),
+                          color: Colors.white,
                         ),
-                      ),
-                      child: Icon(
-                        Icons.arrow_forward,
-                        size: max(width * 0.09, 28),
-                        color: Colors.green,
                       ),
                     ),
                   ),

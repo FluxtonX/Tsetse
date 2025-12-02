@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsetse/Widgets/alarm_widgets.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
-import 'package:tsetse/core/utils/svg_icon.dart';
 import 'package:tsetse/views/lasr_snooze.dart';
 
 class Snooze1Screen extends StatelessWidget {

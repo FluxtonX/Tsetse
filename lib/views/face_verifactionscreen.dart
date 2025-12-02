@@ -157,7 +157,7 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
                                     borderRadius: BorderRadius.circular(12),
                                     image: const DecorationImage(
                                       image: AssetImage(
-                                        "assets/icons/face1.png",
+                                        "assets/images/face1.png",
                                       ), // your clear image
                                       fit: BoxFit.cover,
                                     ),
@@ -194,7 +194,7 @@ class _FaceVerifactionscreenState extends State<FaceVerifactionscreen> {
                                     borderRadius: BorderRadius.circular(12),
                                     image: const DecorationImage(
                                       image: AssetImage(
-                                        "assets/icons/face1.png",
+                                        "assets/images/face1.png",
                                       ), // your unclear image
                                       fit: BoxFit.cover,
                                     ),

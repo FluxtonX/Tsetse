@@ -1,30 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tsetse/Providers/auth_provider.dart';
+import 'package:tsetse/Providers/confirmvisibility_provider.dart';
+import 'package:tsetse/Providers/passwordvissibility_provider.dart';
 import 'package:tsetse/core/utils/app_colors.dart';
 
-class ReusableTextField extends StatelessWidget {
+class ConfirmPassword extends StatelessWidget {
   final String hintText;
-  final IconData icon;
-  final bool obscureText;
+  final IconData prefixIcon;
+  final IconData? suffixIcon;
   final TextEditingController controller;
   final String? Function(String?)? validator;
 
-  const ReusableTextField({
+  const ConfirmPassword({
     super.key,
     required this.hintText,
-    required this.icon,
-    this.obscureText = false,
+    required this.prefixIcon,
+    this.suffixIcon,
     required this.controller,
     this.validator,
   });
 
   @override
   Widget build(BuildContext context) {
-    // MediaQuery values
+    // MediaQuery dimensions
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
+    final confirmProvider = Provider.of<ConfirmvisibilityProvider>(context);
 
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: width * 0.005),
+      padding: EdgeInsets.symmetric(horizontal: width * 0.02),
       child: Container(
         margin: EdgeInsets.symmetric(vertical: height * 0.005),
         decoration: BoxDecoration(
@@ -41,17 +46,31 @@ class ReusableTextField extends StatelessWidget {
           ),
         ),
         child: TextFormField(
-          controller: controller,
-          obscureText: obscureText,
-          style: TextStyle(fontSize: width * 0.04),
           validator: validator,
+          controller: controller,
+          obscureText: confirmProvider.isObscure,
+          style: TextStyle(fontSize: width * 0.04),
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(
               color: Color.fromRGBO(154, 154, 154, 1),
               fontSize: width * 0.04,
             ),
-            prefixIcon: Icon(icon, color: Colors.black, size: width * 0.06),
+            prefixIcon: Icon(
+              prefixIcon,
+              color: Colors.black,
+              size: width * 0.06,
+            ),
+            suffixIcon: IconButton(
+              onPressed: () {
+                confirmProvider.toggleVisibility();
+              },
+              icon: Icon(
+                confirmProvider.isObscure
+                    ? Icons.visibility_off
+                    : Icons.remove_red_eye,
+              ),
+            ),
             border: InputBorder.none,
             contentPadding: EdgeInsets.symmetric(
               horizontal: width * 0.04,
