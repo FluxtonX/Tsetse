@@ -200,15 +200,12 @@ class RegistrationScreen extends StatelessWidget {
                                     if (val == null || val.isEmpty) {
                                       return 'Please confirm your password';
                                     }
-                                    if (val != passwordController) {
-                                      return 'PAssword do not match';
+                                    if (val != passwordController.text.trim()) {
+                                      return 'Password do not match';
                                     }
                                   },
                                 ),
-
                                 SizedBox(height: height * 0.04),
-
-                                /// BUTTON
                                 authProvider.isLoading
                                     ? CircularProgressIndicator()
                                     : GestureDetector(

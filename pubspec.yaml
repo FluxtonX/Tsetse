@@ -25,24 +25,29 @@ dependencies:
   # SVG support
   flutter_svg: ^2.2.3
   provider: ^6.1.5+1
+  flutter_launcher_icons: ^0.14.4
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  # Flutter Gen (correct name!)
   flutter_gen_runner: ^5.5.0
-  
-  # Required for running code generation
   build_runner: ^2.4.8
 
   flutter_lints: ^5.0.0
 
-# Flutter Gen configuration
 flutter_gen:
   output: lib/gen/
   integrations:
     flutter_svg: true
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/fly2.png"
+  min_sdk_android: 21
+  adaptive_icon_foreground: "assets/images/fly2.png"
+  adaptive_icon_background: "#266F52"
 
 flutter:
   uses-material-design: true

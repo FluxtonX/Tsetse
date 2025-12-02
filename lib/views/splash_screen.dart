@@ -32,7 +32,6 @@ class SplashScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                // MAIN ICON
                 Container(
                   height: max(height * 0.18, 120),
                   width: max(width * 0.38, 120),
@@ -49,9 +48,7 @@ class SplashScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
                 SizedBox(height: max(height * 0.025, 15)),
-
                 Text(
                   "TSETSE",
                   style: TextStyle(
